@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+    
+    
+     <ImageView  
+        android:id="@+id/file_list_img"  
+        android:layout_width="@dimen/image_size"  
+        android:layout_height="@dimen/image_size"  
+        android:layout_marginLeft="2dip"  
+        android:layout_marginRight="10dip"  
+        android:layout_gravity="center_vertical" />  
+    
+     
+     <LinearLayout  
+        android:layout_width="wrap_content"  
+        android:layout_height="match_parent" 
+        android:orientation="vertical" >  
+  
+         <LinearLayout  
+             android:layout_width="wrap_content"  
+             android:layout_height="match_parent"  
+             android:orientation="horizontal" >  
+        <TextView  
+            android:id="@+id/file_list_item_name"
+            android:text="11111"  
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  
+            android:gravity="center_vertical"
+            android:layout_weight="1"  
+           />  
+            
+          <TextView 
+            android:id="@+id/file_list_time"
+            android:layout_width="wrap_content"
+            android:text="2222"
+            android:gravity="center_vertical"  
+            android:layout_weight="1"
+            />
+       </LinearLayout>
+        <TextView  
+            android:id="@+id/file_list_item_detail"  
+            android:layout_width="wrap_content"  
+            android:gravity="center_vertical"
+            android:text="3333"  
+            android:singleLine="true"  
+            android:ellipsize="end"  
+            />  
+            
+      
+          
+    </LinearLayout>  
+
+</LinearLayout>-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="fill_parent"  
+    android:layout_margin="2dip"
+    android:layout_height="wrap_content">
+  
+    <ImageView  
+        android:id="@+id/file_list_img"  
+        android:layout_width="@dimen/image_size"  
+        android:layout_height="@dimen/image_size"  
+        android:layout_marginLeft="2dip"  
+        android:layout_marginRight="10dip"
+        android:layout_alignParentLeft="true"
+        android:paddingBottom="10dip"
+        android:layout_gravity="center_vertical" />  
+  
+  
+    <RelativeLayout 
+         android:id="@+id/file_list_linear1"
+         android:layout_toRightOf="@id/file_list_img"
+         android:layout_alignParentTop="true"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+           >
+        <TextView  
+            android:id="@+id/file_list_device_name"  
+  
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+           
+            />  
+            
+         <TextView  
+            android:id="@+id/file_list_time"  
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="15dip"
+            android:layout_alignParentRight="true"  
+            android:gravity="center_vertical"  
+            android:ellipsize="end"  
+            />  
+  
+       
+            
+        </RelativeLayout>
+         
+    <TextView  
+            android:id="@+id/file_list_file_detail"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"  
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/file_list_img"
+            android:layout_below="@id/file_list_linear1"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:singleLine="true"  
+            android:ellipsize="end"  
+            />  
+  
+</RelativeLayout>  
+

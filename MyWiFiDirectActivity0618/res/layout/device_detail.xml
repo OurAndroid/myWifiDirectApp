@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrap="http://schemas.android.com/apk/res/com.example.android.wifidirect"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/detail_fragment" 
+    android:visibility="gone"
+    >
+    <!-- 
+    -->
+
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_connect"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/connect_peer_button"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible" 
+                android:background="@drawable/button_transmit"/>;
+
+           <!--  <Button
+                android:id="@+id/btn_disconnect"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btn_connect"
+                android:text="@string/disconnect_peer_button"
+                android:visibility="gone" /> -->
+
+        </RelativeLayout>
+
+         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+             <Button
+                 android:id="@+id/btn_start_client"
+                 android:layout_width="150dp"
+                 android:layout_height="50dp"
+                 android:layout_marginTop="10dp"
+                 android:layout_centerHorizontal="true"
+                 android:text="@string/get_file_button"
+                 android:textSize="20sp"
+                 android:textColor="@android:color/black"
+                 android:textStyle="bold"
+                 android:background="@drawable/button_send"
+                 android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_start_server"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/btn_start_client"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_recieve"
+                android:text="@string/receive_file_button"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:visibility="gone" />
+
+            </RelativeLayout>
+
+        <TextView
+            android:id="@+id/device_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_green_dark" />
+
+        <TextView
+            android:id="@+id/device_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:textColor="@android:color/holo_green_dark"/>
+        <TextView
+            android:id="@+id/group_owner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:textColor="@android:color/holo_green_dark"/>
+        <TextView
+            android:id="@+id/group_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:textColor="@android:color/holo_green_dark"/>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/status_bar"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_height="37dp"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/background_dark">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/status_text">
+        </TextView>
+    </LinearLayout>
+
+</FrameLayout>

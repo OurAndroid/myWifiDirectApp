@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <!-- 文件类型 -->
+    <ImageView
+        android:id = "@+id/gridImage"
+         android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin = "10dp"
+        android:scaleType="fitCenter"
+        android:background="#00000000"
+        ></ImageView>
+    <ImageView
+        android:id = "@+id/checkImage"
+         android:layout_width="20dp"
+        android:layout_height="20dp"
+       android:layout_alignRight="@id/gridImage"
+       android:layout_alignTop="@id/gridImage"
+        android:scaleType="fitCenter"
+        ></ImageView>
+    <TextView
+        android:id="@+id/gridText"
+        android:layout_width = "70dp"
+        android:layout_height = "20dp"
+       
+        android:gravity = "center"
+       
+        android:layout_below="@id/gridImage"
+        ></TextView>
+
+</RelativeLayout>

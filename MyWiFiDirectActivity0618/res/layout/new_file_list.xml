@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    
+   <com.wifidirect.ui.MyExpandableListView
+       android:id="@+id/expand_file_list"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:cacheColorHint="@null"
+       android:childDivider="@drawable/child_bg"
+       android:childIndicatorLeft="0dp"
+       android:divider="@color/Grey"
+       android:dividerHeight="1dp"
+       android:groupIndicator="@null"
+       android:scrollbarAlwaysDrawHorizontalTrack="false">
+   </com.wifidirect.ui.MyExpandableListView>
+
+</LinearLayout>

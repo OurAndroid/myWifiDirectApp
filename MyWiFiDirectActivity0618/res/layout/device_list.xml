@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" 
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+    xmlns:bootstrap="http://schemas.android.com/apk/res/com.example.android.wifidirect">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="3dp">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/label_me" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:gravity="center_vertical"
+        
+        android:background="@android:color/holo_blue_light"/>
+
+    <!-- Self information
+    android:background="@android:color/holo_blue_light" 
+    android:background="?android:attr/activatedBackgroundIndicator" -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"       
+        android:background="?android:attr/activatedBackgroundIndicator"
+        android:padding="0dip">
+        <ImageView
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/machine" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+id/my_name"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+            <TextView
+                android:id="@+id/my_status"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:ellipsize="marquee" />
+        </LinearLayout>
+        <!-- <ImageButton 
+            android:id="@+id/Imagebtn_discover" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:src="@drawable/ic_action_discover" 
+            /> -->
+		<com.beardedhen.androidbootstrap.BootstrapButton
+	        android:id="@+id/Imagebtn_discover"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginBottom="5dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="搜索"
+	        android:textColor = "#FFFFFF"
+	        bootstrap:bb_roundedCorners="true"
+	        bootstrap:bb_type="success" />
+        
+         <com.beardedhen.androidbootstrap.BootstrapButton
+	        android:id="@+id/btn_disconnect1"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginBottom="5dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/disconnect_peer_button"
+	        android:textColor = "#FFFFFF"
+	        bootstrap:bb_roundedCorners="true"
+	        bootstrap:bb_type="success" />
+        <!--  <Button 
+            android:id="@+id/btn_disconnect1"
+            android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+            android:text="@string/disconnect_peer_button"
+            android:visibility="gone"
+            />-->
+    </LinearLayout>
+
+    <!--  <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/label_peers" />-->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/holo_blue_light" />
+
+    <!-- Available peers -->
+    <ListView
+        android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false" />
+
+    <!--  <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" /> -->
+        
+ 	<com.todddavies.components.progressbar.ProgressWheel
+       android:id="@+id/progressBar1"
+       android:layout_width="200dp"
+       android:layout_height="200dp"
+       android:layout_gravity="center"
+       ProgressWheel:text="寻找设备"
+       ProgressWheel:textColor="@android:color/black"
+       ProgressWheel:textSize="14sp"
+       ProgressWheel:rimColor="#FB9302"
+       ProgressWheel:circleColor="#13AF26"
+       ProgressWheel:barLength="25dp" 
+       ProgressWheel:barColor="#5EC2F4"
+       ProgressWheel:barWidth="35dp"
+       ProgressWheel:rimWidth="35dp" 
+       ProgressWheel:spinSpeed="-1dp" 
+       android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_temp"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        android:text="@string/empty_message" />
+</LinearLayout>
+</LinearLayout>
