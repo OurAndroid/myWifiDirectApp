@@ -20,7 +20,6 @@ package com.example.android.wifidirect;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.todddavies.components.progressbar.ProgressWheel;
 
 
@@ -76,7 +75,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.device_list, null);
-        BootstrapButton btn_dis = (BootstrapButton)mContentView.findViewById(R.id.btn_disconnect1);
+        Button btn_dis = (Button)mContentView.findViewById(R.id.btn_disconnect1);
         mProgressWheel = (ProgressWheel)mContentView.findViewById(R.id.progressBar1);
         btn_dis.setOnClickListener(new View.OnClickListener() {
 			
@@ -101,18 +100,18 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     private static String getDeviceStatus(int deviceStatus) {
         Log.d(WiFiDirectActivity.TAG, "Peer status :" + deviceStatus);
         switch (deviceStatus) {
-            case WifiP2pDevice.AVAILABLE:
-                return "可连接";
-            case WifiP2pDevice.INVITED:
-                return "被邀请";
-            case WifiP2pDevice.CONNECTED:
-                return "已连接";
-            case WifiP2pDevice.FAILED:
-                return "失败";
-            case WifiP2pDevice.UNAVAILABLE:
-                return "不可用";
-            default:
-                return "Unknown";
+        case WifiP2pDevice.AVAILABLE:
+            return "可连接";
+        case WifiP2pDevice.INVITED:
+            return "被邀请";
+        case WifiP2pDevice.CONNECTED:
+            return "已连接";
+        case WifiP2pDevice.FAILED:
+            return "失败";
+        case WifiP2pDevice.UNAVAILABLE:
+            return "不可用";
+        default:
+            return "Unknown";
 
         }
     }
@@ -190,17 +189,12 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     //获取对等设备列表
     @Override
     public void onPeersAvailable(WifiP2pDeviceList peerList) {
-        /*if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }*/
-        if(mProgressWheel != null && mProgressWheel.isSpinning()){
-        	//隐藏mProgressWheel
+        if (mProgressWheel != null && mProgressWheel.isSpinning()) {
         	mProgressWheel.setVisibility(View.GONE);
         }
         //再次改变DeviceListFragment的View的高度
         FileTransmitFragment fileTransmitfragment = (FileTransmitFragment) getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
         fileTransmitfragment.ChangeFragmentHeight(200);
-        
         peers.clear();
         peers.addAll(peerList.getDeviceList());
 		//如果AdapterView可以处理该数据，则变更通知它。比如，如果你有可用对等点的ListView，那就发起一次更新。

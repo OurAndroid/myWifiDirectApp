@@ -25,7 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 import android.content.ContextWrapper;
-import com.beardedhen.androidbootstrap.BootstrapButton;
 //import android.widget.FrameLayout;
 //import android.widget.TextView;
 import com.example.android.wifidirect.DeviceListFragment.DeviceActionListener;
@@ -72,9 +71,11 @@ public class FileTransmitFragment extends Fragment{
   //�豸������Ϣ�����˸ı� 
     DeviceListFragment fragment = (DeviceListFragment) getFragmentManager()
             .findFragmentById(R.id.frag_list);
-		BootstrapButton btn_discover = (BootstrapButton)fragment.mContentView.findViewById(R.id.Imagebtn_discover);
-		//锟斤拷锟斤拷一些锟斤拷锟斤拷
-		btn_discover.setOnClickListener(new View.OnClickListener() {		
+    
+    
+		ImageButton btn_discover = (ImageButton)fragment.mContentView.findViewById(R.id.Imagebtn_discover);
+		btn_discover.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -85,10 +86,9 @@ public class FileTransmitFragment extends Fragment{
 	                //final DeviceListFragment fragment = (DeviceListFragment) getSupportFragmentManager().findFragmentByTag("devicelistfragment");
 	                //FileTransmitFragment fileTransmitfragment = (FileTransmitFragment) getFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
 	            	final DeviceListFragment fragment = (DeviceListFragment)getFragmentManager().findFragmentById(R.id.frag_list);
-	            	//改变DeviceListFragment的高度以适应显示ProgressWheel
 	            	ChangeFragmentHeight(300);
-	            	fragment.mContentView.findViewById(R.id.tv_temp).setVisibility(View.GONE);	               	
-	        		fragment.onInitiateDiscovery();
+	            	fragment.mContentView.findViewById(R.id.tv_temp).setVisibility(View.GONE);	
+	            	fragment.onInitiateDiscovery();
 	                manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
 
 	                    @Override
@@ -132,10 +132,17 @@ public class FileTransmitFragment extends Fragment{
         if(f2 != null)
         	getFragmentManager().beginTransaction().remove(f2).commitAllowingStateLoss();
     }*/
+	public void show_me() {
+		// TODO Auto-generated method stub
+		/*DeviceListFragment fragment = (DeviceListFragment) getChildFragmentManager()
+                .findFragmentById(R.id.frag_list);*/
+		Log.d(WiFiDirectActivity.TAG, "Fragment:"+getFragmentManager().findFragmentByTag("devicelistfragment"));
+	}
 	public void ChangeFragmentHeight(int height){
 		DisplayMetrics dm = getResources().getDisplayMetrics();
-    	int fragmentHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height, dm);
+    	int fragmentHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height, dm);    	
 		rootView.findViewById(R.id.frag_list).setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,fragmentHeight));		
+		rootView.findViewById(R.id.frag_detail).setLayoutParams(new LinearLayout.LayoutParams(
+						LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 	}
-  
 }

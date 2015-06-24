@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal" 
     xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
-    xmlns:bootstrap="http://schemas.android.com/apk/res/com.example.android.wifidirect">
+    >
 
 <LinearLayout
     android:orientation="vertical"
@@ -58,42 +58,27 @@
                 android:singleLine="true"
                 android:ellipsize="marquee" />
         </LinearLayout>
-        <!-- <ImageButton 
+        <ImageButton 
             android:id="@+id/Imagebtn_discover" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
+			android:layout_width="50dp" 
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp" 
+			android:layout_marginBottom="10dp"
+			android:layout_marginRight="10dp"
 			android:src="@drawable/ic_action_discover" 
-            /> -->
-		<com.beardedhen.androidbootstrap.BootstrapButton
-	        android:id="@+id/Imagebtn_discover"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_marginBottom="5dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="搜索"
-	        android:textColor = "#FFFFFF"
-	        bootstrap:bb_roundedCorners="true"
-	        bootstrap:bb_type="success" />
-        
-         <com.beardedhen.androidbootstrap.BootstrapButton
-	        android:id="@+id/btn_disconnect1"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_marginBottom="5dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/disconnect_peer_button"
-	        android:textColor = "#FFFFFF"
-	        bootstrap:bb_roundedCorners="true"
-	        bootstrap:bb_type="success" />
-        <!--  <Button 
+			android:background="@drawable/button_discover"
+            />
+		<Button 
             android:id="@+id/btn_disconnect1"
-            android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
+            android:layout_width="50dp" 
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp" 
+			android:layout_marginBottom="10dp"
+			android:layout_marginRight="10dp"
             android:text="@string/disconnect_peer_button"
+            android:background="@drawable/button_discover"
             android:visibility="gone"
-            />-->
+            />
     </LinearLayout>
 
     <!--  <TextView

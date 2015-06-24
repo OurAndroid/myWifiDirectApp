@@ -155,7 +155,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
             }
         });
 
-        mContentView.findViewById(R.id.btn_disconnect1).setOnClickListener(
+        mContentView.findViewById(R.id.btn_disconnect).setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
@@ -317,6 +317,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
         view.setText(R.string.empty);
         mContentView.findViewById(R.id.btn_start_client).setVisibility(View.GONE);
         mContentView.findViewById(R.id.btn_start_server).setVisibility(View.GONE);
+        //this.getView().setVisibility(View.GONE);
         mContentView.setVisibility(View.GONE);
     }
 

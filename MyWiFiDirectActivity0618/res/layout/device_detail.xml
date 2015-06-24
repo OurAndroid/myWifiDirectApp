@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bootstrap="http://schemas.android.com/apk/res/com.example.android.wifidirect"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:id="@+id/detail_fragment" 
     android:visibility="gone"
     >
-    <!-- 
-    -->
-
         <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -34,13 +30,13 @@
                 android:visibility="visible" 
                 android:background="@drawable/button_transmit"/>;
 
-           <!--  <Button
+             <Button
                 android:id="@+id/btn_disconnect"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/btn_connect"
                 android:text="@string/disconnect_peer_button"
-                android:visibility="gone" /> -->
+                android:visibility="gone" /> 
 
         </RelativeLayout>
 
@@ -106,7 +102,7 @@
         android:layout_gravity="bottom"
         android:layout_height="37dp"
         android:layout_marginBottom="3dp"
-        android:background="@android:color/background_dark">
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

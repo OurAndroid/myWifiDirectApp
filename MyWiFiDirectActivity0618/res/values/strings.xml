@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">文件传输助手</string>
+    <string name="app_name">WiFi Direct</string>
     <string name="enable_p2p_button">P2P On/Off</string>
     <string name="discover_peers_button">Discover</string>
     <string name="connect_peer_button">连接</string>
