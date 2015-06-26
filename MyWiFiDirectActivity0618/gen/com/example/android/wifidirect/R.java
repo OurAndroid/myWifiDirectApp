@@ -74,6 +74,104 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int delayMillis=0x7f010012;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int numberProgressBarStyle=0x7f010023;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_current=0x7f010019;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_max=0x7f01001a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_reached_bar_height=0x7f01001d;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_reached_color=0x7f01001c;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_text_color=0x7f010020;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_text_offset=0x7f010021;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_text_size=0x7f01001f;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>visible</code></td><td>0</td><td></td></tr>
+<tr><td><code>invisible</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int progress_text_visibility=0x7f010022;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_unreached_bar_height=0x7f01001e;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress_unreached_color=0x7f01001b;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -261,12 +359,12 @@ containing a value of this type.
         public static final int white=0x7f040001;
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f050004;
-        public static final int activity_vertical_margin=0x7f050005;
-        public static final int image_magin=0x7f050003;
-        public static final int image_size=0x7f050002;
-        public static final int phone_list_height=0x7f050001;
-        public static final int tablet_list_width=0x7f050000;
+        public static final int activity_horizontal_margin=0x7f060004;
+        public static final int activity_vertical_margin=0x7f060005;
+        public static final int image_magin=0x7f060003;
+        public static final int image_size=0x7f060002;
+        public static final int phone_list_height=0x7f060001;
+        public static final int tablet_list_width=0x7f060000;
     }
     public static final class drawable {
         public static final int background_tab=0x7f020000;
@@ -299,73 +397,75 @@ containing a value of this type.
         public static final int wenjianjia=0x7f02001b;
     }
     public static final class id {
-        public static final int Imagebtn_discover=0x7f09000f;
-        public static final int atn_direct_discover=0x7f090042;
-        public static final int atn_direct_enable=0x7f090041;
-        public static final int btn_connect=0x7f090001;
-        public static final int btn_disconnect=0x7f090002;
-        public static final int btn_disconnect1=0x7f090010;
-        public static final int btn_start_client=0x7f090003;
-        public static final int btn_start_server=0x7f090004;
-        public static final int button=0x7f09002a;
-        public static final int checkImage=0x7f090030;
-        public static final int clear=0x7f090014;
-        public static final int detail_fragment=0x7f090000;
-        public static final int device_address=0x7f090005;
-        public static final int device_details=0x7f09003e;
-        public static final int device_info=0x7f090006;
-        public static final int device_name=0x7f09003d;
-        public static final int expand_file_list=0x7f090039;
-        public static final int file_button=0x7f090022;
-        public static final int file_list_bar=0x7f09001e;
-        public static final int file_list_device_name=0x7f090018;
-        public static final int file_list_file_detail=0x7f09001a;
-        public static final int file_list_group_name=0x7f09001b;
-        public static final int file_list_img=0x7f090016;
-        public static final int file_list_linear1=0x7f090017;
-        public static final int file_list_time=0x7f090019;
-        public static final int file_list_transfer_filename=0x7f09001c;
-        public static final int file_list_transfer_size=0x7f09001d;
-        public static final int file_path=0x7f090040;
-        public static final int filebrowser_linear1=0x7f090027;
-        public static final int filelist=0x7f090015;
-        public static final int filetransmit=0x7f09002b;
-        public static final int frag_detail=0x7f09002e;
-        public static final int frag_list=0x7f09002d;
-        public static final int gridImage=0x7f09002f;
-        public static final int gridText=0x7f090031;
-        public static final int group_ip=0x7f090008;
-        public static final int group_owner=0x7f090007;
-        public static final int icon=0x7f09000c;
-        public static final int image_button=0x7f090021;
-        public static final int image_list_check=0x7f090033;
-        public static final int image_list_image=0x7f090032;
-        public static final int image_list_text=0x7f090034;
-        public static final int img=0x7f09003f;
-        public static final int iv_show=0x7f09003b;
-        public static final int linearLayout1=0x7f09002c;
-        public static final int list=0x7f090026;
-        public static final int list_fragment=0x7f09000b;
-        public static final int list_image=0x7f090035;
-        public static final int list_text=0x7f090036;
-        public static final int my_name=0x7f09000d;
-        public static final int my_status=0x7f09000e;
-        public static final int pager=0x7f090038;
-        public static final int pb=0x7f09003a;
-        public static final int progressBar1=0x7f090011;
-        public static final int select=0x7f090028;
-        public static final int send=0x7f090029;
-        public static final int status_bar=0x7f090009;
-        public static final int status_text=0x7f09000a;
-        public static final int sticky_content=0x7f090024;
-        public static final int sticky_header=0x7f090020;
-        public static final int sticky_layout=0x7f09001f;
-        public static final int tabs=0x7f090037;
-        public static final int text=0x7f090025;
-        public static final int textView1=0x7f090013;
-        public static final int tv_progress=0x7f09003c;
-        public static final int tv_temp=0x7f090012;
-        public static final int video_button=0x7f090023;
+        public static final int Imagebtn_discover=0x7f050011;
+        public static final int atn_direct_discover=0x7f050044;
+        public static final int atn_direct_enable=0x7f050043;
+        public static final int btn_connect=0x7f050003;
+        public static final int btn_disconnect=0x7f050004;
+        public static final int btn_disconnect1=0x7f050012;
+        public static final int btn_start_client=0x7f050005;
+        public static final int btn_start_server=0x7f050006;
+        public static final int button=0x7f05002c;
+        public static final int checkImage=0x7f050032;
+        public static final int clear=0x7f050016;
+        public static final int detail_fragment=0x7f050002;
+        public static final int device_address=0x7f050007;
+        public static final int device_details=0x7f050040;
+        public static final int device_info=0x7f050008;
+        public static final int device_name=0x7f05003f;
+        public static final int expand_file_list=0x7f05003b;
+        public static final int file_button=0x7f050024;
+        public static final int file_list_bar=0x7f050020;
+        public static final int file_list_device_name=0x7f05001a;
+        public static final int file_list_file_detail=0x7f05001c;
+        public static final int file_list_group_name=0x7f05001d;
+        public static final int file_list_img=0x7f050018;
+        public static final int file_list_linear1=0x7f050019;
+        public static final int file_list_time=0x7f05001b;
+        public static final int file_list_transfer_filename=0x7f05001e;
+        public static final int file_list_transfer_size=0x7f05001f;
+        public static final int file_path=0x7f050042;
+        public static final int filebrowser_linear1=0x7f050029;
+        public static final int filelist=0x7f050017;
+        public static final int filetransmit=0x7f05002d;
+        public static final int frag_detail=0x7f050030;
+        public static final int frag_list=0x7f05002f;
+        public static final int gridImage=0x7f050031;
+        public static final int gridText=0x7f050033;
+        public static final int group_ip=0x7f05000a;
+        public static final int group_owner=0x7f050009;
+        public static final int icon=0x7f05000e;
+        public static final int image_button=0x7f050023;
+        public static final int image_list_check=0x7f050035;
+        public static final int image_list_image=0x7f050034;
+        public static final int image_list_text=0x7f050036;
+        public static final int img=0x7f050041;
+        public static final int invisible=0x7f050001;
+        public static final int iv_show=0x7f05003d;
+        public static final int linearLayout1=0x7f05002e;
+        public static final int list=0x7f050028;
+        public static final int list_fragment=0x7f05000d;
+        public static final int list_image=0x7f050037;
+        public static final int list_text=0x7f050038;
+        public static final int my_name=0x7f05000f;
+        public static final int my_status=0x7f050010;
+        public static final int pager=0x7f05003a;
+        public static final int pb=0x7f05003c;
+        public static final int progressBar1=0x7f050013;
+        public static final int select=0x7f05002a;
+        public static final int send=0x7f05002b;
+        public static final int status_bar=0x7f05000b;
+        public static final int status_text=0x7f05000c;
+        public static final int sticky_content=0x7f050026;
+        public static final int sticky_header=0x7f050022;
+        public static final int sticky_layout=0x7f050021;
+        public static final int tabs=0x7f050039;
+        public static final int text=0x7f050027;
+        public static final int textView1=0x7f050015;
+        public static final int tv_progress=0x7f05003e;
+        public static final int tv_temp=0x7f050014;
+        public static final int video_button=0x7f050025;
+        public static final int visible=0x7f050000;
     }
     public static final class layout {
         public static final int device_detail=0x7f030000;
@@ -388,28 +488,28 @@ containing a value of this type.
         public static final int vlist=0x7f030011;
     }
     public static final class menu {
-        public static final int action_items=0x7f080000;
+        public static final int action_items=0x7f090000;
     }
     public static final class string {
-        public static final int app_name=0x7f060000;
-        public static final int clear=0x7f060011;
-        public static final int client_text=0x7f060009;
-        public static final int connect_peer_button=0x7f060003;
-        public static final int disconnect_peer_button=0x7f060004;
-        public static final int discover_peers_button=0x7f060002;
-        public static final int empty=0x7f060006;
-        public static final int empty_message=0x7f06000a;
-        public static final int enable_p2p_button=0x7f060001;
-        public static final int filelist=0x7f060010;
-        public static final int get_file_button=0x7f060005;
-        public static final int group_owner_text=0x7f06000c;
-        public static final int hello_world=0x7f06000f;
-        public static final int label_me=0x7f06000d;
-        public static final int label_peers=0x7f06000e;
-        public static final int no=0x7f060008;
-        public static final int p2p_off_warning=0x7f06000b;
-        public static final int receive_file_button=0x7f060012;
-        public static final int yes=0x7f060007;
+        public static final int app_name=0x7f070000;
+        public static final int clear=0x7f070011;
+        public static final int client_text=0x7f070009;
+        public static final int connect_peer_button=0x7f070003;
+        public static final int disconnect_peer_button=0x7f070004;
+        public static final int discover_peers_button=0x7f070002;
+        public static final int empty=0x7f070006;
+        public static final int empty_message=0x7f07000a;
+        public static final int enable_p2p_button=0x7f070001;
+        public static final int filelist=0x7f070010;
+        public static final int get_file_button=0x7f070005;
+        public static final int group_owner_text=0x7f07000c;
+        public static final int hello_world=0x7f07000f;
+        public static final int label_me=0x7f07000d;
+        public static final int label_peers=0x7f07000e;
+        public static final int no=0x7f070008;
+        public static final int p2p_off_warning=0x7f07000b;
+        public static final int receive_file_button=0x7f070012;
+        public static final int yes=0x7f070007;
     }
     public static final class style {
         /** <style name="AppBaseTheme" parent="android:Theme.Holo">
@@ -418,13 +518,208 @@ containing a value of this type.
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
+        public static final int NumberProgressBar_Beauty_Red=0x7f080004;
+        public static final int NumberProgressBar_Default=0x7f080002;
+        public static final int NumberProgressBar_Funny_Orange=0x7f080008;
+        public static final int NumberProgressBar_Grace_Yellow=0x7f080007;
+        public static final int NumberProgressBar_Passing_Green=0x7f080003;
+        public static final int NumberProgressBar_Relax_Blue=0x7f080006;
+        public static final int NumberProgressBar_Twinkle_Night=0x7f080009;
+        public static final int NumberProgressBar_Warning_Red=0x7f080005;
     }
     public static final class styleable {
+        /** Attributes that can be used with a NumberProgressBar.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_current com.example.android.wifidirect:progress_current}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_max com.example.android.wifidirect:progress_max}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_reached_bar_height com.example.android.wifidirect:progress_reached_bar_height}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_reached_color com.example.android.wifidirect:progress_reached_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_text_color com.example.android.wifidirect:progress_text_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_text_offset com.example.android.wifidirect:progress_text_offset}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_text_size com.example.android.wifidirect:progress_text_size}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_text_visibility com.example.android.wifidirect:progress_text_visibility}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_unreached_bar_height com.example.android.wifidirect:progress_unreached_bar_height}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberProgressBar_progress_unreached_color com.example.android.wifidirect:progress_unreached_color}</code></td><td></td></tr>
+           </table>
+           @see #NumberProgressBar_progress_current
+           @see #NumberProgressBar_progress_max
+           @see #NumberProgressBar_progress_reached_bar_height
+           @see #NumberProgressBar_progress_reached_color
+           @see #NumberProgressBar_progress_text_color
+           @see #NumberProgressBar_progress_text_offset
+           @see #NumberProgressBar_progress_text_size
+           @see #NumberProgressBar_progress_text_visibility
+           @see #NumberProgressBar_progress_unreached_bar_height
+           @see #NumberProgressBar_progress_unreached_color
+         */
+        public static final int[] NumberProgressBar = {
+            0x7f010019, 0x7f01001a, 0x7f01001b, 0x7f01001c,
+            0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020,
+            0x7f010021, 0x7f010022
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_current}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_current
+        */
+        public static final int NumberProgressBar_progress_current = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_max}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_max
+        */
+        public static final int NumberProgressBar_progress_max = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_reached_bar_height}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_reached_bar_height
+        */
+        public static final int NumberProgressBar_progress_reached_bar_height = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_reached_color}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_reached_color
+        */
+        public static final int NumberProgressBar_progress_reached_color = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_text_color}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_text_color
+        */
+        public static final int NumberProgressBar_progress_text_color = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_text_offset}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_text_offset
+        */
+        public static final int NumberProgressBar_progress_text_offset = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_text_size}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_text_size
+        */
+        public static final int NumberProgressBar_progress_text_size = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_text_visibility}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>visible</code></td><td>0</td><td></td></tr>
+<tr><td><code>invisible</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name com.example.android.wifidirect:progress_text_visibility
+        */
+        public static final int NumberProgressBar_progress_text_visibility = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_unreached_bar_height}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_unreached_bar_height
+        */
+        public static final int NumberProgressBar_progress_unreached_bar_height = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#progress_unreached_color}
+          attribute's value can be found in the {@link #NumberProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.wifidirect:progress_unreached_color
+        */
+        public static final int NumberProgressBar_progress_unreached_color = 2;
         /** Attributes that can be used with a PagerSlidingTabStrip.
            <p>Includes the following attributes:</p>
            <table>
@@ -880,5 +1175,28 @@ containing a value of this type.
           @attr name com.example.android.wifidirect:textSize
         */
         public static final int ProgressWheel_textSize = 2;
+        /** Attributes that can be used with a Themes.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #Themes_numberProgressBarStyle com.example.android.wifidirect:numberProgressBarStyle}</code></td><td></td></tr>
+           </table>
+           @see #Themes_numberProgressBarStyle
+         */
+        public static final int[] Themes = {
+            0x7f010023
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.wifidirect.R.attr#numberProgressBarStyle}
+          attribute's value can be found in the {@link #Themes} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.example.android.wifidirect:numberProgressBarStyle
+        */
+        public static final int Themes_numberProgressBarStyle = 0;
     };
 }
