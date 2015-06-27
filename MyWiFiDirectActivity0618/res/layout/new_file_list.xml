@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    xmlns:custom="http://schemas.android.com/apk/res/com.example.android.wifidirect">
     
     
    <com.wifidirect.ui.MyExpandableListView
@@ -17,5 +18,4 @@
        android:groupIndicator="@null"
        android:scrollbarAlwaysDrawHorizontalTrack="false">
    </com.wifidirect.ui.MyExpandableListView>
-
 </LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal" 
     xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:custom="http://schemas.android.com/apk/res/com.example.android.wifidirect">
 
 <LinearLayout
     android:orientation="vertical"
@@ -100,8 +100,17 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:drawSelectorOnTop="false" />
-
-    <!--  <ProgressBar
+	 <!-- <com.numberprogressbar.NumberProgressBar 
+	    android:id="@+id/numberbar7"
+        android:layout_width="wrap_content"
+        android:layout_margin="20dp"
+        custom:progress_reached_bar_height="5dp"
+        custom:progress_unreached_bar_height="5dp"
+        style="@style/NumberProgressBar_Beauty_Red"
+        custom:progress_current="70"
+        android:layout_height="wrap_content"
+	    />
+    <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"

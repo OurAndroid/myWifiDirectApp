@@ -18,6 +18,7 @@ import com.example.filebrowser.utils.ImageWorker;
 import com.fl.database.Info;
 import com.fl.database.TransferInfo;
 import com.fl.utils.DateUtil;
+import com.numberprogressbar.NumberProgressBar;
 
 public class ExpandAdapter extends BaseExpandableListAdapter {
 
@@ -211,7 +212,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 			if(convertView == null){
 				holder = new TransferViewHolder();
 				convertView = mInflater.inflate(R.layout.file_list_transfer, null);
-				holder.bar = (ProgressBar) convertView.findViewById(R.id.file_list_bar);
+				holder.bar = (NumberProgressBar) convertView.findViewById(R.id.file_list_bar);
 				holder.fileName = (TextView) convertView.findViewById(R.id.file_list_transfer_filename);
 				holder.size = (TextView) convertView.findViewById(R.id.file_list_transfer_size);
 				
@@ -258,7 +259,8 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 	public class TransferViewHolder{
 		TextView fileName;
 		TextView size;
-		ProgressBar bar;
+		//ProgressBar bar;
+		NumberProgressBar bar ;
 	}
 	
 	
