@@ -225,11 +225,25 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 			
 			String nameInfo; 
 			if(info.getIsclient() == 1){
-				nameInfo = "正在发送："+info.getDevice_name();
+				nameInfo = "正在发送："+info.getFile_name();
 			}else
-				nameInfo = "正在下载："+info.getDevice_name();
+				nameInfo = "正在下载："+info.getFile_name();
 			holder.fileName.setText(nameInfo);
-			holder.size.setText(info.getSize());
+			long filesize = Long.valueOf(info.getSize());
+			String sFileSize = "";
+			//文件大小大于1M
+			if(filesize > 1024 * 1024){
+				sFileSize = sFileSize + filesize / (1024 * 1024 )+ "."+
+						(filesize % 1048576) / 104857 + "M" ;
+				  
+			}
+			else if (filesize > 1024){
+				sFileSize = sFileSize + filesize / (1024 ) + "K" ;
+			}
+			else {
+				sFileSize = sFileSize + "B" ;
+			}
+			holder.size.setText(sFileSize);
 			holder.bar.setProgress(info.getPosition());
 			
 		}

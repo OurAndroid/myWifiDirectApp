@@ -188,6 +188,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
                     	getConnectDevice();//获取发送端设备信息
                     	DeviceDetailListener listener = (DeviceDetailListener) getActivity();
                     	listener.slideTab(1);
+                    	getDetailFragment().setStatusText("开始发送文件...");
                     }
                 });
 				
@@ -206,7 +207,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
     	        serviceIntent.setAction(FileRecieveService.ACTION_RECEIVE_FILE);
     	        serviceIntent.putExtra("macIP", macAddress);
     	        serviceIntent.putExtra("deviceName", deviceName);
-				
+				getDetailFragment().setStatusText("开始接收...");
 //				new FileServerAsyncTask(getActivity(), mContentView.findViewById(R.id.status_text),getDetailFragment())
 //					.execute();		
     	        getActivity().startService(serviceIntent);
@@ -319,6 +320,12 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
         mContentView.findViewById(R.id.btn_start_server).setVisibility(View.GONE);
         //this.getView().setVisibility(View.GONE);
         mContentView.setVisibility(View.GONE);
+    }
+    
+    public void setStatusText(String status){
+    	TextView statusText;
+    	statusText = (TextView)mContentView.findViewById(R.id.status_text);
+    	statusText.setText(status);
     }
 
     /**

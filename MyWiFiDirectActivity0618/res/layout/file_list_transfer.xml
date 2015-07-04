@@ -18,7 +18,7 @@
         android:id="@+id/file_list_transfer_size"
         android:layout_width = "wrap_content"
         android:layout_height="wrap_content" 
-        android:layout_toRightOf="@id/file_list_transfer_filename"
+        android:layout_alignParentRight="true"
         android:paddingRight="10dp"
                />
     

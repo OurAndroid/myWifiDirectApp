@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.format.Time;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -60,8 +61,6 @@ public class TransferServer {
 	
 	private Context mContext ;
 	
-	private NotificationManager manager ;
-	
 	//这些线程池的初始化都应该放在程序的开始处
 	public static ExecutorService executorService = Executors.newCachedThreadPool();
 	//private MyHander handler ;
@@ -77,7 +76,7 @@ public class TransferServer {
 		this.detailfragment = detailfragment ;
 		filelist = detailfragment.getList();
 		this.mContext = MainApplication.getContext();
-		this.manager = detailfragment.getManager();
+		detailfragment.getManager();
 		try{
 			this.bindToServerPort(defaultBindPort);
 			//executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*POOL_SIZE);
@@ -143,6 +142,8 @@ public class TransferServer {
 		try{
 			serverSocket = new ServerSocket(port);
 			Log.d(WiFiDirectActivity.TAG, "Server: Socket opened , port " + port);
+			//打印状态信息
+			detailfragment.setStatusText("开始接收...");
 			//System.out.println(port);
 			//System.out.println("����������");
 			
@@ -184,18 +185,11 @@ public class TransferServer {
 		}
 		
 		public void run() {
-			// TODO Auto-generated method stub
-			/*System.out.println("New connection accepted "+ 
-					socket.getInetAddress()+":" + socket.getPort());*/
-			//handler = new myHander(manager);
-			//int no_id = NOTICATION_ID ;//+Count * 2 
-			int no_id = (int) Thread.currentThread().getId() ;
 			Log.d(WiFiDirectActivity.TAG , "New connection accepted "+ 
 					socket.getInetAddress()+":" + socket.getPort());
 			DataInputStream dis = null ;
 			DataOutputStream dos = null ;
-			NotificationBean noB = null ;
-			int bufferSize = 1024 ;
+			int bufferSize = 8192 ;
 			byte[] buf = new byte[bufferSize];
 //			noB = new NotificationBean(mContext, R.drawable.wenjian, 
 //					"开始接收文件",System.currentTimeMillis() , no_id);
@@ -234,6 +228,9 @@ public class TransferServer {
 				long passedlen = 0 ;
 				int progress = 0 ; //当前下载进度
 				int times = 0 ;
+				//记录当前时间
+				long start = System.currentTimeMillis();
+				
 				while((read = dis.read(buf))!=-1){
 					passedlen +=read ;
 					dos.write(buf,0,read);
@@ -259,7 +256,10 @@ public class TransferServer {
 				}
 				dos.flush();
 				 Log.d(WiFiDirectActivity.TAG, "文件：" + savePath + "传输完成");
-				 
+				 //传输完成的时间
+				 long end = System.currentTimeMillis();
+				 long time_run = end - start ;
+				 Log.d("zhangxl","传输时间:"+time_run);
 				 String date = DateUtil.getAllDate(new Date());
 
 			        synchronized (transfer) {

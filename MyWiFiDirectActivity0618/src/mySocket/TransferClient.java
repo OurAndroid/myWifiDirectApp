@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class TransferClient {
 	
 	private static String ServerIP ;
 	public static Context mContext ;
+	private int TIME_OUT = 5000 ;
 	private static NotificationBean NoBean ;
 	private Handler mHandler;
 	
@@ -160,7 +162,7 @@ public class TransferClient {
 				{
 					Log.d("fl---", "建立连接");
 
-					int bufferSize = 1024 ;
+					int bufferSize = 8192 ;
 					byte[] buf = new byte[bufferSize];
 					try{
 						DataInputStream fis = new DataInputStream(new 
@@ -239,7 +241,10 @@ public class TransferClient {
 			private boolean createConnection(){
 				try{
 					Log.d("fl---","ip"+ip);
-					socket = new Socket(ip,port);
+					//socket = new Socket(ip,port);
+					//连接超时会出现异常
+					socket = new Socket();
+					socket.connect((new InetSocketAddress(ip, port)), TIME_OUT);
 					//System.out.println("���ӷ������ɹ�");
 					return true ;
 				}catch(Exception e){
