@@ -18,6 +18,7 @@
     <string name="hello_world">Hello World!</string>
     <string name="filelist">已完成的文件</string>
     <string name="clear">清除</string>
+    <string name="clear_info">全部清除</string>
     <string name="receive_file_button">接收</string>
         <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar">
         <!--<style name="AppBaseTheme" parent="android:Theme.Holo">

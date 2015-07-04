@@ -40,6 +40,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.wifidirect.DeviceDetailFragment.DeviceDetailListener;
 import com.example.filebrowser.utils.ImageWorker;
 import com.wifidirect.ui.MyStickyLayout;
 import com.wifidirect.ui.MyStickyLayout.OnGiveUpTouchEventListener;
@@ -158,7 +159,9 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 				// 回调接口发送文件
 			   SendFileCallbackListener sendFileListener = (SendFileCallbackListener) getActivity();
 			   sendFileListener.sendFile(selectedItems);
-			    
+			   //滑动pager到传输管理
+			   DeviceDetailListener listener = (DeviceDetailListener)getActivity();
+			   listener.slideTab(2);
 			}
 			
  		});

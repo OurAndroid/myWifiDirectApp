@@ -56,6 +56,12 @@ public class DBManager {
 		db.update("transfer", cv, "_id = ?", new String[]{String.valueOf(id)});
 	}
 	
+	public void clearTransferInfo(){
+		db.beginTransaction();
+		db.delete("info", null, null);
+		db.endTransaction();
+	}
+	
 	public List<Info> query(String deviceAddress){
 		ArrayList<Info> infos = new ArrayList<Info>();
 		Cursor c;
@@ -78,7 +84,7 @@ public class DBManager {
 	
 	
 	public Cursor queryTheCurse(String address){
-		Cursor c = db.rawQuery("SELECT d.device_name,t._id,t.file_path,t.isclient,t.time FROM device as d,transfer as t WHERE d.device_address = ? and d.device_address = t.device_address" , new String[]{address});
+		Cursor c = db.rawQuery("SELECT d.device_name,t._id,t.file_path,t.isclient,t.time FROM device as d,transfer as t WHERE d.device_address = ? and d.device_address = t.device_address order by t.time" , new String[]{address});
 		return c;
 	}
 	

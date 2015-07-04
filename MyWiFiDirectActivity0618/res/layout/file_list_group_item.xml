@@ -12,7 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dip"
-        android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
+    <TextView 
+        android:id="@+id/file_list_group_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/blue"
+        android:textSize="10sp"
+></TextView>
 </LinearLayout>

@@ -1,20 +1,20 @@
 package com.fl.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.wifidirect.R;
 import com.example.filebrowser.utils.ImageWorker;
+import com.fl.database.DBManager;
 import com.fl.database.Info;
 import com.fl.database.TransferInfo;
 import com.fl.utils.DateUtil;
@@ -28,15 +28,16 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 	private String[] mGroupStrings = null;
 	private List<List<Info>> mData = null;
 	private String tag = "fl-----ExpandAdapter";
+	private DBManager db;
 	
 	private ImageWorker worker;
 	
-	public ExpandAdapter(Context ctx, List<List<Info>> list){
+	public ExpandAdapter(Context ctx, List<List<Info>> list, DBManager db){
 		mContext = ctx;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mGroupStrings = new String[]{"正在传输","已完成"};
 		mData = list;
-		
+		this.db = db;
 		worker = ImageWorker.imageWorkerFactory(ctx);
 	}
 	
@@ -142,6 +143,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 			convertView = mInflater.inflate(R.layout.file_list_group_item, null);
 			holder = new GroupViewHolder();
 			holder.mGroupName = (TextView) convertView.findViewById(R.id.file_list_group_name);
+			holder.clear = (TextView)convertView.findViewById(R.id.file_list_group_clear);
 			convertView.setTag(holder);
 			
 		}else{
@@ -150,6 +152,21 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 		}
 		holder.mGroupName.setText(mGroupStrings[groupPosition]);//设置组名
 		
+		if(groupPosition == 0){
+			holder.clear.setClickable(false);
+		}else{
+			holder.clear.setClickable(true);
+			holder.clear.setText("清除全部");
+			holder.clear.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					//清除发送信息
+					db.clearTransferInfo();
+					
+				}
+			});
+		}
 		return convertView;
 	}
 
@@ -247,6 +264,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 	
 	public class GroupViewHolder{
 		TextView mGroupName;
+		TextView clear;
 	}
 	
 	public class ChildViewHolder{
