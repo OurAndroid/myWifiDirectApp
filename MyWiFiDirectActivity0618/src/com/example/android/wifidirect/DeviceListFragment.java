@@ -87,6 +87,19 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
 				((DeviceActionListener) getActivity()).disconnect();
 			}
 		});
+        mProgressWheel.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+		        if (mProgressWheel != null && mProgressWheel.isSpinning()) {
+		        	mProgressWheel.setVisibility(View.GONE);
+		        }
+		        //再次改变DeviceListFragment的View的高度
+		        FileTransmitFragment fileTransmitfragment = (FileTransmitFragment) getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
+		        fileTransmitfragment.ChangeFragmentHeight(200);
+			}
+		});
         return mContentView;
     }
 

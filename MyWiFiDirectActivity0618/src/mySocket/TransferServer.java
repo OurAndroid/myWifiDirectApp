@@ -270,6 +270,8 @@ public class TransferServer {
 							    
 						dbManager.addTransfer(list);
 					    Log.i(tag, "写入成功");
+					    
+					    mHandler.sendEmptyMessage(3);
 					}
 				 
 //				 Map<String , Object> map = new HashMap<String, Object>();

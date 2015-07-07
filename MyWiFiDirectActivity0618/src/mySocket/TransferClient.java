@@ -225,6 +225,10 @@ public class TransferClient {
 								    
 							dbManager.addTransfer(list);
 						    Log.i(tag, "写入成功");
+						   
+						    //文件写入完毕，刷新数据库
+						  
+						    mHandler.sendEmptyMessage(3);
 						}
 						
 				        

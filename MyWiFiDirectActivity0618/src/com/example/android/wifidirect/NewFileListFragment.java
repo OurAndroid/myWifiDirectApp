@@ -29,7 +29,7 @@ public class NewFileListFragment extends Fragment implements OnHeaderUpdateListe
 	private static List<List<Info>> mDatas = new ArrayList<List<Info>>();
 	private static Map<String, Info> taskInfo = new HashMap<String, Info>();
 	
-	private DBManager dbManager = null;
+	private static DBManager dbManager = null;
 	
 	public static List<Info> list1 = new ArrayList<Info>();
 	public static List<Info> list0 = new ArrayList<Info>();
@@ -96,10 +96,11 @@ public class NewFileListFragment extends Fragment implements OnHeaderUpdateListe
 		//ExpandableListView mListView = (ExpandableListView) rootView.findViewById(R.id.expand_file_list);
 		MyExpandableListView mListView = (MyExpandableListView)rootView.findViewById(R.id.expand_file_list);
 		
-		adapter = new ExpandAdapter(getActivity(), mDatas);
+		adapter = new ExpandAdapter(getActivity(), mDatas, dbManager);
 		mListView.setAdapter(adapter);
 		mListView.setOnHeaderUpdateListener(this);
-		
+		//打开正在传输的标签内容
+		mListView.expandGroup(0);
 		
 		return rootView;
 	}
@@ -145,6 +146,13 @@ public class NewFileListFragment extends Fragment implements OnHeaderUpdateListe
 					taskInfo.remove(key);
 					mDatas.get(0).remove(info);
 				}
+				adapter.notifyDataSetChanged();
+			}
+			else if(msg.what == 3){
+				//更新已传输
+				Log.i("fl---", "收到更新请求");
+				list1 = dbManager.query(null);
+				mDatas.set(1, list1);
 				adapter.notifyDataSetChanged();
 			}
 		}

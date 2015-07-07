@@ -1,6 +1,10 @@
 package com.example.android.wifidirect;
 
 
+import java.io.File;
+
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,7 +15,10 @@ import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.net.wifi.p2p.WifiP2pManager.ChannelListener;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StatFs;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -28,6 +35,7 @@ import android.content.ContextWrapper;
 //import android.widget.FrameLayout;
 //import android.widget.TextView;
 import com.example.android.wifidirect.DeviceListFragment.DeviceActionListener;
+import com.todddavies.components.progressbar.ProgressWheel;
 
 public class FileTransmitFragment extends Fragment{
 
@@ -69,7 +77,7 @@ public class FileTransmitFragment extends Fragment{
   //��ʾWi-Fi�Ե����������״̬�����˸ı� 
     intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
   //�豸������Ϣ�����˸ı� 
-    DeviceListFragment fragment = (DeviceListFragment) getFragmentManager()
+    final DeviceListFragment fragment = (DeviceListFragment) getFragmentManager()
             .findFragmentById(R.id.frag_list);
     
     
@@ -85,7 +93,12 @@ public class FileTransmitFragment extends Fragment{
 	                }
 	                //final DeviceListFragment fragment = (DeviceListFragment) getSupportFragmentManager().findFragmentByTag("devicelistfragment");
 	                //FileTransmitFragment fileTransmitfragment = (FileTransmitFragment) getFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
-	            	final DeviceListFragment fragment = (DeviceListFragment)getFragmentManager().findFragmentById(R.id.frag_list);
+				/*ProgressWheel mProgressWheel = fragment.mProgressWheel ;
+				 if(mProgressWheel != null && mProgressWheel.isSpinning()){
+				        mProgressWheel.setVisibility(View.GONE);
+				        ChangeFragmentHeight(200);
+				}*/
+				 final DeviceListFragment fragment = (DeviceListFragment)getFragmentManager().findFragmentById(R.id.frag_list);
 	            	ChangeFragmentHeight(300);
 	            	fragment.mContentView.findViewById(R.id.tv_temp).setVisibility(View.GONE);	
 	            	fragment.onInitiateDiscovery();
@@ -144,5 +157,30 @@ public class FileTransmitFragment extends Fragment{
 		rootView.findViewById(R.id.frag_list).setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,fragmentHeight));		
 		rootView.findViewById(R.id.frag_detail).setLayoutParams(new LinearLayout.LayoutParams(
 						LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+	}
+	
+	@SuppressLint("NewApi")
+	public long getAvailableSize(){
+		/**
+		 * 获取SD卡的储存空间
+		 */
+		long leftSpace = 0 ;
+		//判断SD卡是否挂载好
+		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+			//获取SD卡文件路径
+			File path = Environment.getExternalStorageDirectory();
+			//一个包装类，用来获取文件系统信息
+			StatFs statfs = new StatFs(path.getPath());
+			//获取Block的SIZE
+			long blockSize = statfs.getBlockSizeLong();
+			//totalBlocks = statfs.getBlockCountLong();
+			//空闲的Block数量
+			long availaBlock = statfs.getAvailableBlocksLong();
+			//计算剩余空间的大小
+			leftSpace = availaBlock * blockSize ;
+			Log.d("zhangxl","剩余空间的大小："+(double)leftSpace /(1024 *1024 * 1024)+"GB");
+			
+		}
+		return leftSpace;
 	}
 }
