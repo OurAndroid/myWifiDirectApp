@@ -387,14 +387,15 @@ containing a value of this type.
         public static final int ic_action_on_off=0x7f020011;
         public static final int ic_launcher=0x7f020012;
         public static final int icon=0x7f020013;
-        public static final int machine=0x7f020014;
-        public static final int section_header=0x7f020015;
-        public static final int selected_dg=0x7f020016;
-        public static final int selector_group=0x7f020017;
-        public static final int selector_item=0x7f020018;
-        public static final int unselected_dg=0x7f020019;
-        public static final int wenjian=0x7f02001a;
-        public static final int wenjianjia=0x7f02001b;
+        public static final int icon_wifidirect=0x7f020014;
+        public static final int machine=0x7f020015;
+        public static final int section_header=0x7f020016;
+        public static final int selected_dg=0x7f020017;
+        public static final int selector_group=0x7f020018;
+        public static final int selector_item=0x7f020019;
+        public static final int unselected_dg=0x7f02001a;
+        public static final int wenjian=0x7f02001b;
+        public static final int wenjianjia=0x7f02001c;
     }
     public static final class id {
         public static final int Imagebtn_discover=0x7f050011;
