@@ -10,7 +10,7 @@
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="client_text">选择接收作为server，发送作为client</string>
-    <string name="empty_message">No devices found. Turn on P2P and perform discovery from the Action Bar</string>
+    <string name="empty_message">没有发现设备，请打开wifi开关并点击搜索按钮</string>
     <string name="p2p_off_warning">Enable P2P from action bar button above or system settings</string>
     <string name="group_owner_text">"Am I the Group Owner? "</string>
     <string name="label_me">我的信息</string>
