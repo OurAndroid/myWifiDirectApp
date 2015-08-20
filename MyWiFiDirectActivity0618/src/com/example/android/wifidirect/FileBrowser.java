@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeSet;
 
 import android.content.ContentResolver;
@@ -40,8 +41,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.wifidirect.DeviceDetailFragment.DeviceDetailListener;
 import com.example.filebrowser.utils.ImageWorker;
+import com.fl.adapter.MyImageAdapter;
+import com.fl.adapter.MySubImageAdapter;
+import com.fl.utils.MimeUtil;
+import com.wifidirect.entity.ImageGroup;
 import com.wifidirect.ui.MyStickyLayout;
 import com.wifidirect.ui.MyStickyLayout.OnGiveUpTouchEventListener;
 
@@ -50,6 +54,9 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 	   File currentParent;
 	   File[] currentFiles;
 	   File[] orderFiles;
+	   
+	   List<ImageGroup> imageGroups;
+	   List<String> imageFiles;
 	   ListView listView;
 	   GridView gridView;
 	   TextView textView;
@@ -63,15 +70,22 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 	   private Button fileButton;
 	   private Button videoButton;
 	   
-	   private Map<String, List<String>> mGroupMap;
+	   private int imageBackTimes;
+	   private static final int IMAGE_VIEW = 1;
+	   private static final int FILE_VIEW = 2;
+	   private static final int VIDEO_VIEW = 3;
+	   private int viewType = FILE_VIEW;
+	   
+	   private Map<String, List<String>> mGroupMap = new HashMap<String,List<String>>();
 	   
 	   ImageWorker imageWorker;
 	   
 	   View mContentView = null;
 	   
 
-	   
+	   MySubImageAdapter mSubImageAdapter = null;
 	   ImageAdapter imageAdapter;
+	   MyImageAdapter mImageAdapter = null;
 	   
 	   /*
 	    * 保存多选信息
@@ -134,10 +148,12 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 		unSelectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_check_off);
 				
 				
-		//为文件夹和文件图标初始化
-		fileBitmap =  BitmapFactory.decodeResource(getResources(), R.drawable.wenjian);
-		dirBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.high_wjj1);
-				
+		//为文件夹和文件图标初始化,这里没有用到，直接使用了资源文件
+		//fileBitmap =  BitmapFactory.decodeResource(getResources(), R.drawable.wenjian);
+		//dirBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.high_wjj1);
+		
+		//开启新线程，获取图片组信息
+		getImages();
 		
 		//根节点
 		File root;
@@ -151,6 +167,43 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 			inflateListView(currentFiles);
 		}
 		
+		imageButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//初始化图片文件夹信息
+				if(imageGroups == null){
+					imageGroups = subGroupOfImage(mGroupMap);
+				}
+				
+				if(mImageAdapter == null){
+				 mImageAdapter = new MyImageAdapter(getActivity(), imageGroups);
+	
+				}
+				gridView.setAdapter(mImageAdapter);
+				gridView.setNumColumns(1);
+				viewType = IMAGE_VIEW;
+				imageBackTimes = 0;
+			    	
+			}
+		});
+		
+		fileButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				if(imageAdapter == null){
+					return;
+				}
+				gridView.setAdapter(imageAdapter);
+				gridView.setNumColumns(4);
+				viewType = FILE_VIEW;
+				
+			}
+		});
+		
+		
 		
 		sendButton.setOnClickListener(new OnClickListener(){
 
@@ -159,15 +212,13 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 				// 回调接口发送文件
 			   SendFileCallbackListener sendFileListener = (SendFileCallbackListener) getActivity();
 			   sendFileListener.sendFile(selectedItems);
-			   //滑动pager到传输管理
-			   DeviceDetailListener listener = (DeviceDetailListener)getActivity();
-			   listener.slideTab(2);
+			    
 			}
 			
  		});
 		
 		
-		
+	  /*多选按钮*/
       button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -179,13 +230,14 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 				//清空已选择的文件路径
 				selectedItems = new ArrayList<String>();
 				//清空图标信息
-				for(Entry<Integer,Boolean> set:itemStatus.entrySet()){
-					set.setValue(false);
+				clearSelectInfo();
 				}
-				}
-				
 				isMultiSelect = !isMultiSelect;
+				//通知各个adapter更新状态
 				imageAdapter.changeStatus(-1);
+				mSubImageAdapter.notifyIsSelect(isMultiSelect);
+				
+				
 			}
 		});
       
@@ -211,7 +263,7 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 		});
@@ -230,29 +282,63 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
     				 * 判断是否进入多选模式
     				 */
     				if(isMultiSelect){
-    					imageAdapter.changeStatus(position);
-    					selectedItems.add(currentFiles[position].getAbsolutePath());
-    				}else{
+    					if(viewType == FILE_VIEW){
+    						imageAdapter.changeStatus(position);
+        					selectedItems.add(currentFiles[position].getAbsolutePath());
+    					}else if(viewType == IMAGE_VIEW){
+    						mSubImageAdapter.changeStatus(position);
+    						selectedItems.add(imageFiles.get(position));
+    					}
     					
-    					if(currentFiles[position].isDirectory()){
-    						currentParent = currentFiles[position];
-    						currentFiles = orderFiles(currentParent.listFiles());
-    						/**
-    						 * 进入文件夹时保存屏幕位置信息
-    						 */
-    						posInfo.add(new Integer[]{index,top});
-    						
-    						//绘制子文件目录
-    						inflateListView(currentFiles);
-    						}else if(currentFiles[position].getName().toLowerCase().contains(".jpg")){
-    							Intent intent = new Intent(Intent.ACTION_VIEW);
-    							intent.setDataAndType(Uri.parse("file://"+currentFiles[position].getAbsolutePath()), "image/*");
-    							intent.addCategory(Intent.CATEGORY_DEFAULT);
-    							startActivity(intent);
-    							
-    							Log.i("fl", currentFiles[position].getName());
-    							
+    				}else{
+    					if(viewType == FILE_VIEW){
+    						if(currentFiles[position].isDirectory()){
+        						currentParent = currentFiles[position];
+        						currentFiles = orderFiles(currentParent.listFiles());
+        						/**
+        						 * 进入文件夹时保存屏幕位置信息
+        						 */
+        						posInfo.add(new Integer[]{index,top});
+        						
+        						//绘制子文件目录
+        						inflateListView(currentFiles);
+        						}else{
+        							String mimeType = MimeUtil.getMimeType(currentFiles[position]);
+        							Intent intent = new Intent(Intent.ACTION_VIEW);
+        							intent.setDataAndType(Uri.parse("file://"+currentFiles[position].getAbsolutePath()), mimeType);
+        							intent.addCategory(Intent.CATEGORY_DEFAULT);
+        							startActivity(intent);
+        							
+        							Log.i("fl", currentFiles[position].getName());
+        							
+        						}
+    					}else if(viewType == IMAGE_VIEW){
+    						if(imageBackTimes == 0){//从group组进入child组
+    							Iterator it = mGroupMap.entrySet().iterator();
+        						if(mGroupMap.size() < position){
+        							return;
+        						}
+        						for(int i = 0; i!=position; i++){
+        							it.next();
+        						}
+        						Entry<String, List<String>>  entry = (Map.Entry<String,List<String>>)it.next();
+        						imageFiles = entry.getValue();
+        						
+        						if(mSubImageAdapter == null){
+        							itemStatus = new HashMap<Integer, Boolean>(2*imageFiles.size());
+        							mSubImageAdapter = new MySubImageAdapter(FileBrowser.this.getActivity(), imageFiles, itemStatus);
+        						}else{
+        							mSubImageAdapter.setDataSet(imageFiles);
+        						}
+        						gridView.setAdapter(mSubImageAdapter);
+        						gridView.setNumColumns(3);
+        						imageBackTimes++;
+        						
     						}
+    					
+    					}
+    					
+    					
     						
     				}
     				
@@ -265,40 +351,8 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
     		
     		stickyLayout.setOnGiveUpTouchEventListener(this);
       
-//		listView.setOnItemClickListener(new OnItemClickListener(){
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view,
-//					int position, long id) {
-//				// TODO Auto-generated method stub
-//				
-//				if(currentFiles[position].isDirectory()){
-//				currentParent = currentFiles[position];
-//				currentFiles = orderFiles(currentParent.listFiles());
-//				
-//				
-//				inflateListView(currentFiles);
-//				}else if(currentFiles[position].getName().toLowerCase().contains(".jpg")){
-//					/*Intent intent = new Intent(Intent.ACTION_VIEW);
-//					intent.setDataAndType(Uri.parse("file://"+currentFiles[position].getAbsolutePath()), "image/*");
-//					intent.addCategory(Intent.CATEGORY_DEFAULT);
-//					startActivity(intent);
-//					
-//					//获取文件名的逻辑改变
-//					 
-//					Intent intent = new Intent();
-//					intent.putExtra("EXTRAS_FILE_PATH", currentFiles[position].getAbsolutePath().toString());
-//				    setResult(Activity.RESULT_OK , intent);
-//					Log.i("fl", currentFiles[position].getName());
-//					finish();*/
-//					
-//				}
-//				
-//				
-//			}
-//			
-//		});
-//		
+
+
 		/*
 		 * fragment中监听返回按钿
 		 */
@@ -316,23 +370,52 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 	                // handle back button
 	            	Date date = new Date();
 	    			
-	    			if(currentParent.getAbsolutePath().equals("/")){
-	    				if(currentTime==0||(date.getTime()-currentTime>1000)){
-	    					//TODO:获取activity的方式正确吗＿
-	    					Toast.makeText(getActivity(), "再按丿̡返回逿Ǻ",Toast.LENGTH_SHORT).show();
-	    				    currentTime = date.getTime();
-	    				}else{
-	    					getActivity().finish();
-	    				}
-	    					
-	    			}
-	    			else if(currentParent.getParentFile()!=null){
-	    				currentParent = currentParent.getParentFile();
-	    			    currentFiles = orderFiles(currentParent.listFiles());
-	    			    inflateListView(currentFiles);
-	    			}
-
-	                return true;
+	            	if(viewType == FILE_VIEW){
+	            		if(currentParent.getAbsolutePath().equals("/")){
+		    				if(currentTime==0||(date.getTime()-currentTime>1000)){
+		    					//TODO:获取activity的方式正确吗＿
+		    					Toast.makeText(getActivity(), "再按一次返回键退出",Toast.LENGTH_SHORT).show();
+		    				    currentTime = date.getTime();
+		    				}else{
+		    					getActivity().finish();
+		    				}
+		    					
+		    			}
+		    			else if(currentParent.getParentFile()!=null){
+		    				currentParent = currentParent.getParentFile();
+		    			    currentFiles = orderFiles(currentParent.listFiles());
+		    			    inflateListView(currentFiles);
+		    			}
+	            		 return true;
+	            	}
+	            	
+	            	else if(viewType == IMAGE_VIEW || viewType == VIDEO_VIEW){
+	            		if(imageBackTimes == 0){
+	            			if(currentTime==0||(date.getTime()-currentTime>1000)){
+		    					//TODO:获取activity的方式正确吗＿
+		    					Toast.makeText(getActivity(), "再按一次返回键退出",Toast.LENGTH_SHORT).show();
+		    				    currentTime = date.getTime();
+		    				}else{
+		    					getActivity().finish();
+		    				}
+	            		}else{
+	            			if(imageGroups == null){
+	        					imageGroups = subGroupOfImage(mGroupMap);
+	        				}
+	        				
+	        				if(mImageAdapter == null){
+	        				 mImageAdapter = new MyImageAdapter(getActivity(), imageGroups);
+	        	
+	        				}
+	        				gridView.setAdapter(mImageAdapter);
+	        				gridView.setNumColumns(1);
+//	        				viewType = IMAGE_VIEW;
+	        				imageBackTimes--;
+	            		}
+	            		
+	            		return true;
+	            	}
+	    			
 
 	            }
 
@@ -353,39 +436,6 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 			
 		}
 
-		//监听返回按钮
-        /*
-		@Override
-		public void onBackPressed() {
-			// TODO Auto-generated method stub
-			//super.onBackPressed();
-			Date date = new Date();
-			
-			if(currentParent.getAbsolutePath().equals("/")){
-				if(currentTime==0||(date.getTime()-currentTime>1000)){
-					Toast.makeText(this, "再按丿̡返回逿Ǻ",Toast.LENGTH_SHORT).show();
-				    currentTime = date.getTime();
-				}else{
-					finish();
-				}
-					
-			}
-			else if(currentParent.getParentFile()!=null){
-				currentParent = currentParent.getParentFile();
-			    currentFiles = orderFiles(currentParent.listFiles());
-			    inflateListView(currentFiles);
-			}
-			
-		}
-		
-		*/
-		
-		
-		
-
-
-
-	
 		
 		
 		private File[] orderFiles(File[] currentFiles){
@@ -652,7 +702,9 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 			return false;
 		}
 		
-		
+		/**
+		 * 解析出图片组的信息
+		 */
 		private void getImages(){
 			new Thread(new Runnable(){
 
@@ -661,26 +713,63 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 					// TODO Auto-generated method stub
 					Uri mImageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 					ContentResolver mContentResolver = getActivity().getContentResolver();
-					Cursor mCursor = mContentResolver.query(mImageUri, null, 
-							MediaStore.Images.Media.MIME_TYPE+"=? or "+MediaStore.Images.Media.MIME_TYPE+" = ?", 
-							new String[]{"image/jepg","image/png"}, MediaStore.Images.Media.DATE_MODIFIED);
-					if(mCursor == null){
-						return;
-					}
-					while(mCursor.moveToNext()){//将查询到的文件路径加入map
-						String path = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
-						String parentName = new File(path).getParentFile().getName();
-						if(!mGroupMap.containsKey(parentName)){
-							List<String> childList = new ArrayList<String>();
-							childList.add(path);
-							mGroupMap.put(parentName, childList);
-						}else{
-							mGroupMap.get(parentName).add(path);
+				
+						Cursor mCursor = mContentResolver.query(mImageUri, null, 
+								MediaStore.Images.Media.MIME_TYPE+"=? or " + MediaStore.Images.Media.MIME_TYPE +"=?", 
+								new String[]{"image/jpeg","image/png"}, MediaStore.Images.Media.DATE_MODIFIED);
+						if(mCursor == null){
+							return;
+						}
+						while(mCursor.moveToNext()){//将查询到的文件路径加入map
+							String path = mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
+							String parentName = new File(path).getParentFile().getName();
+							if(!mGroupMap.containsKey(parentName)){
+								List<String> childList = new ArrayList<String>();
+								childList.add(path);
+								mGroupMap.put(parentName, childList);
+							}else{
+								mGroupMap.get(parentName).add(path);
+							}
 						}
 					}
-				}
 				
-			});
+				
+				
+			}).start();
+		}
+		
+		/**
+		 * 解析出图片组的信息
+		 * @param map
+		 * @return
+		 */
+		private List<ImageGroup> subGroupOfImage(Map<String,List<String>> map){
+			List<ImageGroup> list = new ArrayList<ImageGroup>();
+			if(map.isEmpty()){
+				return null;
+			}
+			Iterator<Map.Entry<String, List<String>>> iterator = map.entrySet().iterator();
+			while(iterator.hasNext()){
+				Map.Entry<String, List<String>> entry = iterator.next();
+				String key = entry.getKey();
+				List<String> value = entry.getValue();
+				
+				ImageGroup group = new ImageGroup();
+				group.setCount(value.size());
+				group.setParentName(key);
+				group.setTopImagePath(value.get(0));//获取该组第一个元素
+				list.add(group);
+			}
+			return list;
+		}
+		
+		/**
+		 * 清除已选择的信息
+		 */
+		public void clearSelectInfo(){
+			for(Entry<Integer,Boolean> set:itemStatus.entrySet()){
+				set.setValue(false);
+			}
 		}
 		
 		
@@ -705,6 +794,9 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 			}
 			return false;
 		}
+
+
+	
 
 
 	}

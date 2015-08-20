@@ -361,6 +361,7 @@ containing a value of this type.
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f060004;
         public static final int activity_vertical_margin=0x7f060005;
+        public static final int image_group_size=0x7f060006;
         public static final int image_magin=0x7f060003;
         public static final int image_size=0x7f060002;
         public static final int phone_list_height=0x7f060001;
@@ -399,8 +400,8 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Imagebtn_discover=0x7f050011;
-        public static final int atn_direct_discover=0x7f050045;
-        public static final int atn_direct_enable=0x7f050044;
+        public static final int atn_direct_discover=0x7f05004a;
+        public static final int atn_direct_enable=0x7f050049;
         public static final int btn_connect=0x7f050003;
         public static final int btn_disconnect=0x7f050004;
         public static final int btn_disconnect1=0x7f050012;
@@ -411,10 +412,10 @@ containing a value of this type.
         public static final int clear=0x7f050016;
         public static final int detail_fragment=0x7f050002;
         public static final int device_address=0x7f050007;
-        public static final int device_details=0x7f050041;
+        public static final int device_details=0x7f050046;
         public static final int device_info=0x7f050008;
-        public static final int device_name=0x7f050040;
-        public static final int expand_file_list=0x7f05003c;
+        public static final int device_name=0x7f050045;
+        public static final int expand_file_list=0x7f050041;
         public static final int file_button=0x7f050025;
         public static final int file_list_bar=0x7f050021;
         public static final int file_list_device_name=0x7f05001a;
@@ -426,7 +427,7 @@ containing a value of this type.
         public static final int file_list_time=0x7f05001b;
         public static final int file_list_transfer_filename=0x7f05001f;
         public static final int file_list_transfer_size=0x7f050020;
-        public static final int file_path=0x7f050043;
+        public static final int file_path=0x7f050048;
         public static final int filebrowser_linear1=0x7f05002a;
         public static final int filelist=0x7f050017;
         public static final int filetransmit=0x7f05002e;
@@ -438,21 +439,26 @@ containing a value of this type.
         public static final int group_owner=0x7f050009;
         public static final int icon=0x7f05000e;
         public static final int image_button=0x7f050024;
-        public static final int image_list_check=0x7f050036;
-        public static final int image_list_image=0x7f050035;
-        public static final int image_list_text=0x7f050037;
-        public static final int img=0x7f050042;
+        public static final int image_child_list_image=0x7f050035;
+        public static final int image_child_list_select=0x7f050036;
+        public static final int image_group_count=0x7f050039;
+        public static final int image_group_dirname=0x7f050038;
+        public static final int image_group_image=0x7f050037;
+        public static final int image_list_check=0x7f05003b;
+        public static final int image_list_image=0x7f05003a;
+        public static final int image_list_text=0x7f05003c;
+        public static final int img=0x7f050047;
         public static final int invisible=0x7f050001;
-        public static final int iv_show=0x7f05003e;
+        public static final int iv_show=0x7f050043;
         public static final int linearLayout1=0x7f05002f;
         public static final int list=0x7f050029;
         public static final int list_fragment=0x7f05000d;
-        public static final int list_image=0x7f050038;
-        public static final int list_text=0x7f050039;
+        public static final int list_image=0x7f05003d;
+        public static final int list_text=0x7f05003e;
         public static final int my_name=0x7f05000f;
         public static final int my_status=0x7f050010;
-        public static final int pager=0x7f05003b;
-        public static final int pb=0x7f05003d;
+        public static final int pager=0x7f050040;
+        public static final int pb=0x7f050042;
         public static final int progressBar1=0x7f050013;
         public static final int select=0x7f05002b;
         public static final int send=0x7f05002c;
@@ -461,10 +467,10 @@ containing a value of this type.
         public static final int sticky_content=0x7f050027;
         public static final int sticky_header=0x7f050023;
         public static final int sticky_layout=0x7f050022;
-        public static final int tabs=0x7f05003a;
+        public static final int tabs=0x7f05003f;
         public static final int text=0x7f050028;
         public static final int textView1=0x7f050015;
-        public static final int tv_progress=0x7f05003f;
+        public static final int tv_progress=0x7f050044;
         public static final int tv_temp=0x7f050014;
         public static final int video_button=0x7f050026;
         public static final int visible=0x7f050000;
@@ -479,15 +485,17 @@ containing a value of this type.
         public static final int filebrowser=0x7f030006;
         public static final int filetransmit=0x7f030007;
         public static final int gridline=0x7f030008;
-        public static final int image_list_line=0x7f030009;
-        public static final int listline=0x7f03000a;
-        public static final int main=0x7f03000b;
-        public static final int my_xml=0x7f03000c;
-        public static final int new_file_list=0x7f03000d;
-        public static final int notify_content=0x7f03000e;
-        public static final int row_devices=0x7f03000f;
-        public static final int testgridview=0x7f030010;
-        public static final int vlist=0x7f030011;
+        public static final int image_child_list=0x7f030009;
+        public static final int image_group_list=0x7f03000a;
+        public static final int image_list_line=0x7f03000b;
+        public static final int listline=0x7f03000c;
+        public static final int main=0x7f03000d;
+        public static final int my_xml=0x7f03000e;
+        public static final int new_file_list=0x7f03000f;
+        public static final int notify_content=0x7f030010;
+        public static final int row_devices=0x7f030011;
+        public static final int testgridview=0x7f030012;
+        public static final int vlist=0x7f030013;
     }
     public static final class menu {
         public static final int action_items=0x7f090000;
