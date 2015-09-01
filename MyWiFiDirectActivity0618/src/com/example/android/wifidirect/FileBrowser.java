@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.TreeSet;
 
 import android.content.ContentResolver;
@@ -41,6 +40,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.filebrowser.utils.ImageLoader;
+import com.example.filebrowser.utils.ImageLoaderConfig;
 import com.example.filebrowser.utils.ImageWorker;
 import com.fl.adapter.MyImageAdapter;
 import com.fl.adapter.MySubImageAdapter;
@@ -65,6 +66,8 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 	   long currentTime = 0;
 	   MyStickyLayout stickyLayout;
 	   
+	   public int BitmapWidth;
+	   
 	   //分别对应图片，文件，视频的按钮
 	   private Button imageButton;
 	   private Button fileButton;
@@ -78,7 +81,9 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 	   
 	   private Map<String, List<String>> mGroupMap = new HashMap<String,List<String>>();
 	   
-	   ImageWorker imageWorker;
+	   //ImageWorker imageWorker;   需要通过config初始化
+	   ImageLoader imageWorker = ImageLoader.getInstance();
+	   
 	   
 	   View mContentView = null;
 	   
@@ -125,9 +130,9 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 		
 		//imageWorker = new ImageWorker(this.getActivity());
 		this.getActivity();
-		imageWorker = ImageWorker.imageWorkerFactory(this.getActivity());
-		
-		imageWorker.setLoadingImage(R.drawable.empty_photo);
+//		imageWorker = ImageWorker.imageWorkerFactory(this.getActivity());
+//		
+//		imageWorker.setLoadingImage(R.drawable.empty_photo);
 
 		//Application app = this.getActivity().getApplication();
 		
@@ -146,7 +151,10 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 		//为多选对勾 初始化
 		selectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_check_on_selected);
 		unSelectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_check_off);
-				
+		
+		//初始化bitmap大小
+		BitmapWidth = this.getActivity().getResources().getDimensionPixelSize(R.dimen.image_size);
+		
 				
 		//为文件夹和文件图标初始化,这里没有用到，直接使用了资源文件
 		//fileBitmap =  BitmapFactory.decodeResource(getResources(), R.drawable.wenjian);
@@ -492,12 +500,6 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 		
 		
 		
-		
-		
-		
-		
-		
-		
 		/**
 		 * 填充listView
 		 * @param files 将被显示的文件
@@ -660,8 +662,8 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 				
 				//加载不同的图片类型
 				if(isImage(name.toLowerCase())){
-					
-					imageWorker.loadImage(data.get(position).get("icon"), viewHolder.imageView);
+					imageWorker.displayImage((String)data.get(position).get("icon"), viewHolder.imageView, BitmapWidth);
+					//imageWorker.loadImage(data.get(position).get("icon"), viewHolder.imageView);
 				}else{
 					
 					

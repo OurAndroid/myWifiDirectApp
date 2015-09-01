@@ -65,7 +65,7 @@ public class ImageWorker {
 		return worker;
 	}
 	
-	public ImageWorker(Context context){
+	private ImageWorker(Context context){
 		mResources = context.getResources();
 		int maxMemory = (int) Runtime.getRuntime().maxMemory()/1024;
 		int cacheSize = Math.round(maxMemory*0.7f);
@@ -75,6 +75,11 @@ public class ImageWorker {
 		mImageCache = new ImageCache(cacheSize);
 	}
 	
+	/**
+	 * TODO:这里的同步策略有问题？？
+	 * @param key
+	 * @param bitmap
+	 */
 	public void addBitmapToMemory(String key, BitmapDrawable bitmap){
 		if(getBitmapFromCache(key) == null){
 			mImageCache.addBitmapToMemCache(key, bitmap);
@@ -108,6 +113,8 @@ public class ImageWorker {
 			final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mLoadingBitmap, task);
 			
 			imageView.setImageDrawable(asyncDrawable);
+			
+		   
 			
 			task.executeOnExecutor(this.DUAL_THREAD_EXECUTOR);
 			//task.execute();     //������ڲ�ִ��˳��
