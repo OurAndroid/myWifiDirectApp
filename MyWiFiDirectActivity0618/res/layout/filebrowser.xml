@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/filebrowser"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -18,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:gravity="center"
-            android:background="#78A524"
+            android:background="#FFB000"
             android:orientation="vertical" >
 
         <LinearLayout 
@@ -49,7 +50,7 @@
                  android:layout_margin="5dp"
                   android:padding="10dp"
                 android:background="@drawable/button"/>
-              <Button 
+              <!--  <Button 
                 android:id="@+id/video_button"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
@@ -58,7 +59,7 @@
                 android:textSize="18sp"
                  android:layout_margin="5dp"
                   android:padding="10dp"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button"/>-->
             
         </LinearLayout>   
 

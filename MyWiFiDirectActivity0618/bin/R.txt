@@ -106,7 +106,7 @@ int id device_details 0x7f050046
 int id device_info 0x7f050008
 int id device_name 0x7f050045
 int id expand_file_list 0x7f050041
-int id file_button 0x7f050025
+int id file_button 0x7f050026
 int id file_list_bar 0x7f050021
 int id file_list_device_name 0x7f05001a
 int id file_list_file_detail 0x7f05001c
@@ -118,6 +118,7 @@ int id file_list_time 0x7f05001b
 int id file_list_transfer_filename 0x7f05001f
 int id file_list_transfer_size 0x7f050020
 int id file_path 0x7f050048
+int id filebrowser 0x7f050022
 int id filebrowser_linear1 0x7f05002a
 int id filelist 0x7f050017
 int id filetransmit 0x7f05002e
@@ -128,7 +129,7 @@ int id gridText 0x7f050034
 int id group_ip 0x7f05000a
 int id group_owner 0x7f050009
 int id icon 0x7f05000e
-int id image_button 0x7f050024
+int id image_button 0x7f050025
 int id image_child_list_image 0x7f050035
 int id image_child_list_select 0x7f050036
 int id image_group_count 0x7f050039
@@ -155,14 +156,13 @@ int id send 0x7f05002c
 int id status_bar 0x7f05000b
 int id status_text 0x7f05000c
 int id sticky_content 0x7f050027
-int id sticky_header 0x7f050023
-int id sticky_layout 0x7f050022
+int id sticky_header 0x7f050024
+int id sticky_layout 0x7f050023
 int id tabs 0x7f05003f
 int id text 0x7f050028
 int id textView1 0x7f050015
 int id tv_progress 0x7f050044
 int id tv_temp 0x7f050014
-int id video_button 0x7f050026
 int id visible 0x7f050000
 int layout device_detail 0x7f030000
 int layout device_list 0x7f030001

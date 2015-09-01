@@ -36,6 +36,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,7 +72,7 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 	   //分别对应图片，文件，视频的按钮
 	   private Button imageButton;
 	   private Button fileButton;
-	   private Button videoButton;
+//	   private Button videoButton;
 	   
 	   private int imageBackTimes;
 	   private static final int IMAGE_VIEW = 1;
@@ -140,13 +141,15 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 		stickyLayout = (MyStickyLayout) mContentView.findViewById(R.id.sticky_layout);
 		imageButton = (Button) stickyLayout.findViewById(R.id.image_button);
 	    fileButton = (Button)stickyLayout.findViewById(R.id.file_button);
-	    videoButton = (Button)stickyLayout.findViewById(R.id.video_button);
+//	    videoButton = (Button)stickyLayout.findViewById(R.id.video_button);
 		
 		//listView = (ListView) mContentView.findViewById(R.id.list);
 		textView = (TextView) mContentView.findViewById(R.id.text);
 		gridView = (GridView) mContentView.findViewById(R.id.list);
 		button = (Button)mContentView.findViewById(R.id.select);
 		sendButton = (Button) mContentView.findViewById(R.id.send);
+		
+		changeButtonState(false);//创建时默认为未连接，不显示button
 		
 		//为多选对勾 初始化
 		selectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.btn_check_on_selected);
@@ -218,8 +221,11 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 			@Override
 			public void onClick(View v) {
 				// 回调接口发送文件
-			   SendFileCallbackListener sendFileListener = (SendFileCallbackListener) getActivity();
-			   sendFileListener.sendFile(selectedItems);
+				if(selectedItems!= null && selectedItems.size() != 0){
+					 SendFileCallbackListener sendFileListener = (SendFileCallbackListener) getActivity();
+					 sendFileListener.sendFile(selectedItems);
+				}
+			  
 			    
 			}
 			
@@ -444,6 +450,27 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 			
 		}
 
+		/**
+		 * 根据连接状态改变button的visible
+		 * @param isconnect
+		 */
+		public void changeButtonState(boolean isconnect){
+//			LayoutInflater inflater = LayoutInflater.from(this.getActivity());
+//			LinearLayout ly = (LinearLayout) inflater.inflate(R.id.filebrowser_linear1, null);
+			LinearLayout ly = (LinearLayout)mContentView.findViewById(R.id.filebrowser_linear1);
+			if(!isconnect){
+				
+				ly.setVisibility(View.GONE);
+//				sendButton.setVisibility(View.INVISIBLE);
+//				button.setVisibility(View.INVISIBLE);
+			}else{
+				ly.setVisibility(View.VISIBLE);
+				
+//				sendButton.setVisibility(View.VISIBLE);
+//				button.setVisibility(View.VISIBLE);
+			}
+		}
+		
 		
 		
 		private File[] orderFiles(File[] currentFiles){

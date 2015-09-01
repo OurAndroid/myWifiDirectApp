@@ -651,6 +651,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
     	 * 滑动tab
     	 */
     	public void slideTab(int position);
+    	
     }
     
     

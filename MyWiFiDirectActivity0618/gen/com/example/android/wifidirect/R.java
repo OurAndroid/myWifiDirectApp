@@ -417,7 +417,7 @@ containing a value of this type.
         public static final int device_info=0x7f050008;
         public static final int device_name=0x7f050045;
         public static final int expand_file_list=0x7f050041;
-        public static final int file_button=0x7f050025;
+        public static final int file_button=0x7f050026;
         public static final int file_list_bar=0x7f050021;
         public static final int file_list_device_name=0x7f05001a;
         public static final int file_list_file_detail=0x7f05001c;
@@ -429,6 +429,7 @@ containing a value of this type.
         public static final int file_list_transfer_filename=0x7f05001f;
         public static final int file_list_transfer_size=0x7f050020;
         public static final int file_path=0x7f050048;
+        public static final int filebrowser=0x7f050022;
         public static final int filebrowser_linear1=0x7f05002a;
         public static final int filelist=0x7f050017;
         public static final int filetransmit=0x7f05002e;
@@ -439,7 +440,7 @@ containing a value of this type.
         public static final int group_ip=0x7f05000a;
         public static final int group_owner=0x7f050009;
         public static final int icon=0x7f05000e;
-        public static final int image_button=0x7f050024;
+        public static final int image_button=0x7f050025;
         public static final int image_child_list_image=0x7f050035;
         public static final int image_child_list_select=0x7f050036;
         public static final int image_group_count=0x7f050039;
@@ -466,14 +467,13 @@ containing a value of this type.
         public static final int status_bar=0x7f05000b;
         public static final int status_text=0x7f05000c;
         public static final int sticky_content=0x7f050027;
-        public static final int sticky_header=0x7f050023;
-        public static final int sticky_layout=0x7f050022;
+        public static final int sticky_header=0x7f050024;
+        public static final int sticky_layout=0x7f050023;
         public static final int tabs=0x7f05003f;
         public static final int text=0x7f050028;
         public static final int textView1=0x7f050015;
         public static final int tv_progress=0x7f050044;
         public static final int tv_temp=0x7f050014;
-        public static final int video_button=0x7f050026;
         public static final int visible=0x7f050000;
     }
     public static final class layout {

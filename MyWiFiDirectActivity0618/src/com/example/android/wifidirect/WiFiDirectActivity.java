@@ -395,6 +395,8 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
             	DeviceListFragment fragment = (DeviceListFragment)fileTransmitfragment.getFragmentManager().findFragmentById(R.id.frag_list);
                 Button btn_connect = (Button)fragment.mContentView.findViewById(R.id.btn_connect1);
                 btn_connect.setText("断开");*/
+            	changeButtonState(true); //显示filebrowser中的按钮
+            	
             }
 
             @Override
@@ -413,6 +415,9 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
         fragment.resetViews();
         final DeviceListFragment fragmentlist = (DeviceListFragment)fileTransmitfragment.getFragmentManager().findFragmentById(R.id.frag_list);
         fragmentlist.ResetDisconnect();
+        
+        changeButtonState(false);
+        
         manager.removeGroup(channel, new ActionListener() {
 
             @Override
@@ -424,6 +429,7 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
             @Override
             public void onSuccess() {
                 fragment.getrootView().setVisibility(View.GONE);
+               
             }
 
         });
@@ -579,6 +585,18 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
      	
 		return fragment.getDeviceInfo(mac);
 	}
+	
+	
+	
+	/**
+	 * 改变filebrowser中的发送按钮的状态
+	 * @param isconnect
+	 */
+	public void changeButtonState(boolean isconnect){
+		FileBrowser fb = (FileBrowser) this.getSupportFragmentManager().findFragmentById(R.id.filebrowser);
+		fb.changeButtonState(isconnect);
+	}
+	
 	
 	
 	

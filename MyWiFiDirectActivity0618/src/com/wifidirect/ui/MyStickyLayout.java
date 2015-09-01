@@ -77,7 +77,8 @@ public class MyStickyLayout extends LinearLayout{
 			mOriginalHeaderHeight = mHeader.getMeasuredHeight();
 			mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
 			mInitDataSuccess = true;
-			mHeaderHeight = mOriginalHeaderHeight;
+			mHeaderHeight = 0;//这里先将高度设置为0
+			setHeaderHeight(0);
 			
 			if(DEBUG){
 				Log.i(TAG, "mTouchSlop = "+mTouchSlop+"mOriginalHeaderHeight"+mOriginalHeaderHeight);
