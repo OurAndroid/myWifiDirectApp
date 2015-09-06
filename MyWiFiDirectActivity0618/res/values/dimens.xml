@@ -18,6 +18,7 @@
     <dimen name="tablet_list_width">300dp</dimen>
     <dimen name="phone_list_height">200dp</dimen>
     <dimen name="image_size">70dp</dimen>
+    <dimen name="image_size_big">120dp</dimen>
     <dimen name ="image_magin">1dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

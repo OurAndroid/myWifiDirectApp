@@ -359,11 +359,12 @@ containing a value of this type.
         public static final int white=0x7f040001;
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f060004;
-        public static final int activity_vertical_margin=0x7f060005;
-        public static final int image_group_size=0x7f060006;
-        public static final int image_magin=0x7f060003;
+        public static final int activity_horizontal_margin=0x7f060005;
+        public static final int activity_vertical_margin=0x7f060006;
+        public static final int image_group_size=0x7f060007;
+        public static final int image_magin=0x7f060004;
         public static final int image_size=0x7f060002;
+        public static final int image_size_big=0x7f060003;
         public static final int phone_list_height=0x7f060001;
         public static final int tablet_list_width=0x7f060000;
     }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:orientation="horizontal" >
+    <ImageView 
+        android:layout_width="@dimen/image_group_size"
+        android:layout_height="@dimen/image_group_size"
+        android:scaleType="center"
+        android:id="@+id/image_group_image"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/image_group_dirname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="left"
+            android:text="图片"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/image_group_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="left"
+            android:text="100"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

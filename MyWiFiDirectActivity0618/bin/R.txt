@@ -52,11 +52,12 @@ int color translucency 0x7f040003
 int color transparent 0x7f040007
 int color transparent_background 0x7f04000e
 int color white 0x7f040001
-int dimen activity_horizontal_margin 0x7f060004
-int dimen activity_vertical_margin 0x7f060005
-int dimen image_group_size 0x7f060006
-int dimen image_magin 0x7f060003
+int dimen activity_horizontal_margin 0x7f060005
+int dimen activity_vertical_margin 0x7f060006
+int dimen image_group_size 0x7f060007
+int dimen image_magin 0x7f060004
 int dimen image_size 0x7f060002
+int dimen image_size_big 0x7f060003
 int dimen phone_list_height 0x7f060001
 int dimen tablet_list_width 0x7f060000
 int drawable background_tab 0x7f020000

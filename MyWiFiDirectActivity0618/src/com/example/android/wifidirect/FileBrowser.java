@@ -689,7 +689,7 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 				
 				//加载不同的图片类型
 				if(isImage(name.toLowerCase())){
-					imageWorker.displayImage((String)data.get(position).get("icon"), viewHolder.imageView, BitmapWidth);
+					imageWorker.displayImage((String)data.get(position).get("icon"), viewHolder.imageView, BitmapWidth, BitmapWidth);
 					//imageWorker.loadImage(data.get(position).get("icon"), viewHolder.imageView);
 				}else{
 					
