@@ -176,6 +176,9 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
         //设置每个tab的宽度
         tabs.setTabPaddingLeftRight(36);
         
+        // 设置tab适应屏幕，使得tab的宽度跟着tab数量的变化而变化
+        tabs.setShouldExpand(true);
+        
 
     }
     public  class MyPagerAdapter extends FragmentPagerAdapter {
