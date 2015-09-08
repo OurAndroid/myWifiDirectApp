@@ -8,7 +8,9 @@ import mySocket.TransferClient;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 
 import com.fl.database.DBManager;
@@ -33,6 +35,8 @@ public class FileTransferService extends IntentService {
     private Handler mHandler = null;
     private DeviceDetailFragment detailFragment ;
     private DBManager dbManager = null;
+    
+    private TransferClient tClient = null ;
     
     public FileTransferService(String name) {
         super(name);
@@ -82,44 +86,15 @@ public class FileTransferService extends IntentService {
         	t.setIsclient(1);
         	
         	//创建TransferClient对象
-            new TransferClient(filelist , host , detailFragment, dbManager, t, mHandler).service();
-        	
+        	tClient = new TransferClient(filelist , host , detailFragment, dbManager, t, mHandler);
+        	tClient.service();
             //Socket socket = new Socket();
             int port = intent.getExtras().getInt(EXTRAS_GROUP_OWNER_PORT);
 
-           /* try {
-                Log.d(WiFiDirectActivity.TAG, "Opening client socket - ");
-                socket.bind(null);
-                socket.connect((new InetSocketAddress(host, port)), SOCKET_TIMEOUT);
-
-                Log.d(WiFiDirectActivity.TAG, "Client socket - " + socket.isConnected());
-                OutputStream stream = socket.getOutputStream();
-               // ContentResolver cr = context.getContentResolver();
-                File file = new File(fileUri);
-                InputStream is = null;
-                try {
-                	is = new FileInputStream(file);
-                   // is = cr.openInputStream(Uri.parse(fileUri));
-                } catch (FileNotFoundException e) {
-                    Log.d(WiFiDirectActivity.TAG, e.toString());
-                }
-                DeviceDetailFragment.copyFile(is, stream);
-                Log.d(WiFiDirectActivity.TAG, "Client: Data written");
-            } catch (IOException e) {
-                Log.e(WiFiDirectActivity.TAG, e.getMessage());
-            } finally {
-                if (socket != null) {
-                    if (socket.isConnected()) {
-                        try {
-                            socket.close();
-                        } catch (IOException e) {
-                            // Give up
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }*/
-
         }
     }
+       
+    
 }
+
+

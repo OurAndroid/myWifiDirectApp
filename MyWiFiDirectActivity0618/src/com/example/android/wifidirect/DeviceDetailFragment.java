@@ -39,8 +39,10 @@ import mySocket.TransferClient;
 import mySocket.TransferServer;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -52,6 +54,7 @@ import android.net.wifi.p2p.WifiP2pManager.ConnectionInfoListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -82,6 +85,9 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
     private WifiP2pInfo info;
     ProgressDialog progressDialog = null;
     private View rootView = null ;
+    private FileRecieveService msgService = null ;
+    private boolean isBind = false ;
+    
     public static List<Map<String,Object>> list = new ArrayList<Map<String , Object>>() ;
   
     
@@ -568,6 +574,8 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
     	        serviceIntent.putStringArrayListExtra(FileTransferService.EXTRAS_FILE_PATH, list);  //uri.toString() putExtra���������ݲ����ģ�putExtra("A",B)�У���һ������Ϊ�������ڶ�������Ϊ�����õ�ֵ��
     	        serviceIntent.putExtra("macIP", macAddress);
     	        serviceIntent.putExtra("deviceName", deviceName);
+    	        // 绑定Service
+    	        isBind = getActivity().bindService(serviceIntent, scon, Context.BIND_AUTO_CREATE);
     	        
     	        if(localIP.equals(IP_SERVER)){
     				serviceIntent.putExtra(FileTransferService.EXTRAS_ADDRESS, clientIP);
@@ -579,6 +587,33 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
     	       
     }
     
+    ServiceConnection scon = new ServiceConnection() {
+		
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			// TODO Auto-generated method stub
+			msgService = ((FileRecieveService.MsgBinder)service).getService();
+		}
+	};
+	// 关闭ServerSocket
+	public void closeServerSocket(){
+		msgService.closeServerSocket();
+	}
+	
+    @Override
+	public void onDestroy() {
+    	if(isBind){
+        	// 解除绑定
+        	getActivity().unbindService(scon);   		
+    	}
+    	super.onDestroy();
+    };
     
     
     public void getConnectDevice() {

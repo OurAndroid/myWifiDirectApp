@@ -6,12 +6,15 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.RandomAccess;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -43,7 +46,7 @@ public class TransferServer {
 	
 	private DBManager dbManager;
 	//�������׽��ֵȴ��Է��������Լ��ļ�����
-	private ServerSocket serverSocket ;
+	private ServerSocket serverSocket = null ;
 	//�̳߳�
 	
 	//����CPU���̳߳ش�С
@@ -88,6 +91,16 @@ public class TransferServer {
 		}
 	}
 	
+	public void ServerSocketClose(){
+		if(serverSocket != null){
+			try {
+				serverSocket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	/**
 	 * 构造函数，传入消息处理的handler
@@ -127,17 +140,6 @@ public class TransferServer {
 		}
 	}
 	
-	/*public void beginServer() throws Exception{
-		try{
-			this.bindToServerPort(port);
-			executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*POOL_SIZE);
-			//System.out.println("�����߳�����" + Runtime.getRuntime().availableProcessors()*POOL_SIZE);
-			
-		}
-		catch(Exception e){
-			throw new Exception("端口不能绑定");
-		}
-	}*/
 	private void bindToServerPort(int port) throws Exception{
 		try{
 			serverSocket = new ServerSocket(port);
@@ -148,14 +150,7 @@ public class TransferServer {
 			//System.out.println("����������");
 			
 		}catch(Exception e){
-			/*this.tryBindTimes = this.tryBindTimes + 1 ;
-			port = port + this.tryBindTimes ;
-			if(this.tryBindTimes >= 20){
-				throw new Exception("���Ѿ����Ժܶ���ˣ�������Ȼ�޷��󶨵�ָ���Ķ˿ڣ�������ѡ��󶨵�Ĭ�϶˿ں�");
-			}*/
 			e.printStackTrace();
-			//�ݹ�󶨶˿�
-			//this.bindToServerPort(port);
 		}
 	}
 	
@@ -189,18 +184,31 @@ public class TransferServer {
 					socket.getInetAddress()+":" + socket.getPort());
 			DataInputStream dis = null ;
 			DataOutputStream dos = null ;
+			RandomAccessFile access = null ;
 			int bufferSize = 8192 ;
-			byte[] buf = new byte[bufferSize];
-//			noB = new NotificationBean(mContext, R.drawable.wenjian, 
-//					"开始接收文件",System.currentTimeMillis() , no_id);
-//		    manager.notify(no_id, noB);			
+			byte[] buf = new byte[bufferSize];		
 			try{
 				dis = new DataInputStream(new 
 							BufferedInputStream(socket.getInputStream()));
+				dos = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 				//保存文件的路径，需要改
 				String fileName = dis.readUTF();
 				String savePath = Environment.getExternalStorageDirectory() + "/"
                            + "wifiDirect/" +fileName;
+				final File f = new File(savePath);
+				File dirs = new File(f.getParent());
+				if(!dirs.exists())
+					dirs.mkdirs();
+				//f.createNewFile();
+				long start_index = 0 ;
+				if(f.exists()){
+					start_index = f.length();
+				}
+				else f.createNewFile();
+				// 发送已经传送的长度
+				dos.writeLong(start_index);
+				dos.flush();
+				
 				long length = dis.readLong();
 				//获取传输唯一标识key
 				String key = KeyUtil.getKey(savePath);
@@ -216,24 +224,23 @@ public class TransferServer {
 				msgCreate.what = 1;
 				mHandler.sendMessage(msgCreate);
 				
-				final File f = new File(savePath);
-				File dirs = new File(f.getParent());
-				if(!dirs.exists())
-					dirs.mkdirs();
-				f.createNewFile();
 				
-				dos = new DataOutputStream(new 
-						BufferedOutputStream(new FileOutputStream(f)));
+				/*dos = new DataOutputStream(new 
+						BufferedOutputStream(new FileOutputStream(f)));*/
+				access = new RandomAccessFile(f, "rw");
+				// 跳过已经发送的长度
+				access.skipBytes((int) start_index);
 				int read = 0 ;
-				long passedlen = 0 ;
-				int progress = 0 ; //当前下载进度
+				long passedlen = start_index ;
+				int progress = (int) start_index ; //当前下载进度
 				int times = 0 ;
 				//记录当前时间
 				long start = System.currentTimeMillis();
 				
 				while((read = dis.read(buf))!=-1){
 					passedlen +=read ;
-					dos.write(buf,0,read);
+					//dos.write(buf,0,read);
+					access.write(buf, 0, read);
 					//System.out.println("�ļ�["+savePath +"]�Ѿ�����:"+passedlen * 100L/length + "%");
 					if(times == 15 || (passedlen == length)){
 						if(passedlen == length){
@@ -273,23 +280,10 @@ public class TransferServer {
 					    
 					    mHandler.sendEmptyMessage(3);
 					}
-				 
-//				 Map<String , Object> map = new HashMap<String, Object>();
-//				 map.put("file_path", savePath);
-//				 map.put("img", R.drawable.wenjian);
-//				 filelist.add(map);
-				 /*for(int i = 0 ; i < filelist.size() ; i++){
-					 Log.d(WiFiDirectActivity.TAG, "filelist[i]"+filelist.get(i));
-				 }*/
 				
-				 //System.out.println("�ļ�:"+savePath+ "�������!");
 			}catch(Exception e){
-				e.printStackTrace();
-//				noB.contentView.setProgressBar(R.id.pb, 100, 0, true);
-//    		    noB.contentView.setTextViewText(R.id.tv_progress, "接收失败");
-//    		    manager.notify(no_id, noB);    		    
+				e.printStackTrace();	    
                 Toast.makeText(mContext,"接收失败",0).show();	
-				//System.out.println("�����ļ�ʧ��");
 			}
 			finally {	
     		    
@@ -299,6 +293,9 @@ public class TransferServer {
 					}
 					if(dis != null){
 						dis.close();
+					}
+					if(access != null){
+						access.close();
 					}
 					if(socket != null){
 						socket.close();
@@ -310,9 +307,6 @@ public class TransferServer {
 		}
 		
 	}
-	/*public static void main(String[] args) throws Exception {
-		new TransferServer().service();
-	}*/
 	
 }
 

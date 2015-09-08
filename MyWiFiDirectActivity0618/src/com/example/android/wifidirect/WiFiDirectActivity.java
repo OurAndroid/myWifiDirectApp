@@ -177,7 +177,7 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
         tabs.setTabPaddingLeftRight(36);
         
         // 设置tab适应屏幕，使得tab的宽度跟着tab数量的变化而变化
-        tabs.setShouldExpand(true);
+        //tabs.setShouldExpand(true);
         
 
     }
@@ -416,6 +416,7 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
         FileTransmitFragment fileTransmitfragment = (FileTransmitFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":0");
         final DeviceDetailFragment fragment = (DeviceDetailFragment)fileTransmitfragment.getFragmentManager().findFragmentById(R.id.frag_detail);                
         fragment.resetViews();
+        fragment.closeServerSocket() ;
         final DeviceListFragment fragmentlist = (DeviceListFragment)fileTransmitfragment.getFragmentManager().findFragmentById(R.id.frag_list);
         fragmentlist.ResetDisconnect();
         

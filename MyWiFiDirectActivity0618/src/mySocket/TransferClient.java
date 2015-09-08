@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -154,9 +155,6 @@ public class TransferClient {
 				//System.out.println("��ʼ�����ļ�:" + filePath);
 				int no_id = (int) Thread.currentThread().getId();
 				File file = new File(filePath);
-//				NoBean = new NotificationBean(mContext, R.drawable.wenjian, 
-//						"发送文件："+file.getName(),System.currentTimeMillis() , no_id);
-//				DeviceDetailFragment.manager.notify(no_id,NoBean);
 				Log.d("fl---", "准备建立连接");
 				if(createConnection())
 				{
@@ -168,18 +166,28 @@ public class TransferClient {
 						DataInputStream fis = new DataInputStream(new 
 								BufferedInputStream(new FileInputStream(filePath)));
 						DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-						
+						DataInputStream fdis = new DataInputStream(socket.getInputStream());
+						RandomAccessFile access = new RandomAccessFile(file, "r");
+						// 发送文件名
 						dos.writeUTF(file.getName());
 						dos.flush();
+						// 接收方回应是否已经有收到过该文件，返回已收到的文件长度，未收到文件则返回0
+						long start_index = 0 ;
+						start_index = fdis.readLong();
+						// 发送文件长度
 						dos.writeLong(file.length());
 						dos.flush();
 						
+						// 跳过已经发送过的长度
+						access.skipBytes((int) start_index);
+						
 						int read = 0 ;
-						int passedlen = 0 ;
+						int passedlen = (int) start_index ;
 						long length = file.length();
 						int times = 0 ;
-						int progress = 0 ;
-						while((read = fis.read(buf))!=-1){
+						int progress = (int) start_index ;
+						
+						while((read = access.read(buf))!=-1){				//while((read = fis.read(buf))!=-1)
 							passedlen += read ;
 							dos.write(buf,0,read);
 							/*
@@ -203,14 +211,11 @@ public class TransferClient {
 						}
 						dos.flush();
 						fis.close();
+						access.close();
 						dos.close();
 						socket.close();
-						//System.out.println("�ļ�"+filePath + "������ɣ�");
+						
 						Log.d(WiFiDirectActivity.TAG, "File: " + filePath +"传输成功");
-//				        Map<String,Object> map = new HashMap<String, Object>();
-//				        map.put("file_path", filePath);
-//				        map.put("img", R.drawable.wenjian);
-//				        DeviceDetailFragment.list.add(map);
 				        
 				        /*
 				         * 向数据库中写入传输信息，可以考虑将这些信息缓存起来，在程序退出时写入数据库
@@ -249,11 +254,9 @@ public class TransferClient {
 					//连接超时会出现异常
 					socket = new Socket();
 					socket.connect((new InetSocketAddress(ip, port)), TIME_OUT);
-					//System.out.println("���ӷ������ɹ�");
 					return true ;
 				}catch(Exception e){
 					e.printStackTrace();
-					//System.out.println("���ӷ�����ʧ��");
 					return false;
 				}
 			}

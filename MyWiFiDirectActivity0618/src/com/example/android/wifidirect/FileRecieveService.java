@@ -7,6 +7,7 @@ import mySocket.TransferServer;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
@@ -104,6 +105,21 @@ public class FileRecieveService extends IntentService {
 	
 	}
 	
+	public void closeServerSocket(){
+		transferServer.ServerSocketClose();
+	}
 	
+    @Override
+    public IBinder onBind(Intent intent) {
+    	// TODO Auto-generated method stub
+    	return new MsgBinder();
+    }
+    
+    
+    class MsgBinder extends Binder {
+    	public FileRecieveService getService(){
+    		return FileRecieveService.this ;
+    	}
+    }
 
 }
