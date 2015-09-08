@@ -16,6 +16,7 @@
 
 package com.example.android.wifidirect;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -121,24 +122,12 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
         
         // add necessary intent values to be matched.
 
-       /* intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
-      //��ʾWi-Fi�Ե�����״̬�����˸ı�  
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-      //��ʾ���õĶԵȵ���б?���˸ı�
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-      //��ʾWi-Fi�Ե����������״̬�����˸ı� 
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
-      //�豸������Ϣ�����˸ı� */
         manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         channel = manager.initialize(this, getMainLooper(), null);
         filetransmitfragment = new FileTransmitFragment(manager,channel,this); //,intentFilter
         
         //初始化文件传输的fragment，因为handler需要初始化
-        filelistfragment = new NewFileListFragment();
-        
-//        Handler mHandler = filelistfragment.new MyHandler();
-//        MainApplication app = (MainApplication) this.getApplication();
-//        app.setmHandler(mHandler);
+        filelistfragment = new NewFileListFragment();      
         
     }
     public void onConfigurationChanged(Configuration newConfig){
@@ -398,7 +387,7 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
             	DeviceListFragment fragment = (DeviceListFragment)fileTransmitfragment.getFragmentManager().findFragmentById(R.id.frag_list);
                 Button btn_connect = (Button)fragment.mContentView.findViewById(R.id.btn_connect1);
                 btn_connect.setText("断开");*/
-            	changeButtonState(true); //显示filebrowser中的按钮
+            	//changeButtonState(true); //显示filebrowser中的按钮
             	
             }
 
@@ -597,14 +586,10 @@ SendFileCallbackListener,DeviceDetailListener,DeviceListListener{
 	 * @param isconnect
 	 */
 	public void changeButtonState(boolean isconnect){
-		FileBrowser fb = (FileBrowser) this.getSupportFragmentManager().findFragmentById(R.id.filebrowser);
+		//FileBrowser fb = (FileBrowser) this.getSupportFragmentManager().findFragmentById(R.id.filebrowser);
+		FileBrowser fb= (FileBrowser) this.getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
 		fb.changeButtonState(isconnect);
 	}
-	
-	
-	
-	
-	
-	  
+  
    
 }

@@ -161,7 +161,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
             }
         });
 
-        mContentView.findViewById(R.id.btn_disconnect).setOnClickListener(
+/*        mContentView.findViewById(R.id.btn_disconnect).setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
@@ -171,7 +171,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
                     	getActivity().stopService(new Intent(getActivity(), FileTransferService.class));
                         ((DeviceActionListener) getActivity()).disconnect();
                     }
-                });
+                });*/
 
         mContentView.findViewById(R.id.btn_start_client).setOnClickListener(
                 new View.OnClickListener() {
@@ -194,6 +194,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
                     	getConnectDevice();//获取发送端设备信息
                     	DeviceDetailListener listener = (DeviceDetailListener) getActivity();
                     	listener.slideTab(1);
+                    	((WiFiDirectActivity) getActivity()).changeButtonState(true);
                     	getDetailFragment().setStatusText("开始发送文件...");
                     }
                 });
@@ -603,6 +604,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 	};
 	// 关闭ServerSocket
 	public void closeServerSocket(){
+		if(msgService != null)
 		msgService.closeServerSocket();
 	}
 	
