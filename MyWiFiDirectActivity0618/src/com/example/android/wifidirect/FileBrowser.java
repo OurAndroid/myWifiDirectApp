@@ -249,6 +249,7 @@ public class FileBrowser extends Fragment implements OnGiveUpTouchEventListener{
 				isMultiSelect = !isMultiSelect;
 				//通知各个adapter更新状态
 				imageAdapter.changeStatus(-1);
+				if(mSubImageAdapter != null)
 				mSubImageAdapter.notifyIsSelect(isMultiSelect);
 				
 				
