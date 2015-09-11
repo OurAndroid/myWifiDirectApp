@@ -13,7 +13,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.89"
+            android:layout_gravity="center_vertical"
             android:text="@string/filelist"
             android:textSize="20sp" />
 
@@ -21,8 +21,7 @@
             android:id="@+id/clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.22"
-            android:gravity="center"
+            android:layout_gravity="center_vertical"
             android:text="@string/clear" />
 
     </LinearLayout>
